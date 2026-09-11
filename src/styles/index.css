@@ -1,0 +1,68 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: #f4f3ef;
+  --color-foreground: #111111;
+  --color-card: #ffffff;
+  --color-card-foreground: #111111;
+  --color-primary: #ff3300;
+  --color-primary-foreground: #ffffff;
+  --color-muted: #e5e5e5;
+  --color-muted-foreground: #666666;
+  --color-border: #e5e5e5;
+  
+  --animate-spotlight: spotlight 2s ease .75s 1 forwards;
+  --animate-marquee: marquee 30s linear infinite;
+  
+  @keyframes spotlight {
+    0% {
+      opacity: 0;
+      transform: translate(-72%, -62%) scale(0.5);
+    }
+    100% {
+      opacity: 1;
+      transform: translate(-50%,-40%) scale(1);
+    }
+  }
+  
+  @keyframes marquee {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+}
+
+@layer base {
+  :root {
+    --background: #f4f3ef;
+    --foreground: #111111;
+    --card: #ffffff;
+    --border: rgba(0, 0, 0, 0.1);
+  }
+  
+  * {
+    border-color: var(--border);
+  }
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-white/80 backdrop-blur-md border border-black/5;
+  }
+  .glass-card {
+    @apply bg-white/90 backdrop-blur-xl border border-black/5;
+  }
+  .text-gradient {
+    @apply text-[#ff3300];
+  }
+}
