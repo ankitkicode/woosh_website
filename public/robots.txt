@@ -1,0 +1,23 @@
+# Woosh Queens — Robots.txt
+# https://wooshride.in
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://wooshride.in/sitemap.xml
+
+# Crawl Delay (optional — be nice to servers)
+Crawl-delay: 1
+
+# Disallow admin/internal paths
+Disallow: /api/
+Disallow: /admin/
+Disallow: /.env
+Disallow: /node_modules/
+
+# Allow search engines to index all assets
+Allow: /images/
+Allow: /logo.png
+Allow: /*.js$
+Allow: /*.css$

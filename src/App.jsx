@@ -40,7 +40,7 @@ function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#f4f3ef] text-[#111111] font-sans selection:bg-[#ff3300]/30 selection:text-[#ff3300]">
+    <div className="min-h-screen bg-[#FFFBFD] text-[#2D2D2D] font-sans selection:bg-[#E91E63]/20 selection:text-[#E91E63]">
       <Navbar />
       <main>
         <HeroSection />
@@ -55,7 +55,7 @@ function App() {
       {/* Scroll to Top Button */}
       <button 
         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-        className="fixed bottom-8 right-8 w-12 h-12 bg-white text-black rounded-full flex items-center justify-center shadow-lg border border-black/5 hover:bg-neutral-100 transition-colors z-50"
+        className="fixed bottom-8 right-8 w-12 h-12 bg-gradient-to-br from-[#E91E63] to-[#9C27B0] text-white rounded-full flex items-center justify-center shadow-[0_4px_20px_rgba(233,30,99,0.3)] hover:shadow-[0_8px_30px_rgba(233,30,99,0.45)] hover:scale-110 transition-all duration-300 z-50"
       >
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" /></svg>
       </button>

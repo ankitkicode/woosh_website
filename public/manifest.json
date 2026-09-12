@@ -1,0 +1,66 @@
+{
+  "name": "Woosh Queens — Ride & Earn",
+  "short_name": "Woosh Queens",
+  "description": "India's safest bike taxi platform exclusively for women and children. 100% verified women riders, live GPS, SOS emergency.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFFBFD",
+  "theme_color": "#E91E63",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en-IN",
+  "dir": "ltr",
+  "categories": ["transportation", "travel", "women safety"],
+  "icons": [
+    {
+      "src": "/favicon-16x16.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-48x48.png",
+      "sizes": "48x48",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-64x64.png",
+      "sizes": "64x64",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/images/city_commute.jpg",
+      "sizes": "1024x1024",
+      "type": "image/jpeg",
+      "label": "Woosh Queens — Women riders in Indian cities"
+    }
+  ],
+  "related_applications": [
+    {
+      "platform": "play",
+      "url": "https://play.google.com/store/apps/details?id=com.woosh.queens"
+    },
+    {
+      "platform": "itunes",
+      "url": "https://apps.apple.com/app/woosh-queens"
+    }
+  ]
+}
