@@ -65,7 +65,9 @@ export const Navbar = () => {
 
         {/* CTA + Mobile Toggle */}
         <div className="flex items-center gap-3">
-          <Button variant="primary" className="text-sm rounded-full px-6 py-2.5 font-semibold hidden md:flex">
+          <Button 
+          onClick={() => window.location.href = "https://play.google.com/store/apps/details?id=com.woosh.in"}
+           variant="primary" className="text-sm rounded-full px-6 py-2.5 font-semibold hidden md:flex">
             Get the app
           </Button>
 
