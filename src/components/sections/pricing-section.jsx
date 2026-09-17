@@ -45,7 +45,7 @@ export const PricingSection = () => {
               ))}
             </div>
             
-            <Button variant="outline" className="w-full rounded-xl py-6 font-semibold">
+            <Button onClick={() => window.location.href = "https://play.google.com/store/apps/details?id=com.woosh.in"} variant="outline" className="w-full rounded-xl py-6 font-semibold">
               Download App
             </Button>
           </motion.div>
@@ -95,7 +95,7 @@ export const PricingSection = () => {
               ))}
             </div>
             
-            <Button variant="primary" className="w-full rounded-xl py-6 font-semibold">
+            <Button onClick={() => window.location.href = "https://play.google.com/store/apps/details?id=com.woosh.ride"} variant="primary" className="w-full rounded-xl py-6 font-semibold">
               Apply to Ride
             </Button>
           </motion.div>

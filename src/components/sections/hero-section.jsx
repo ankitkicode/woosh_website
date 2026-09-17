@@ -101,16 +101,18 @@ export const HeroSection = () => {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="flex flex-col sm:flex-row items-center gap-4"
           >
-            <button className="w-full sm:w-auto bg-gradient-to-r from-[#E91E63] to-[#9C27B0] hover:shadow-[0_8px_30px_rgba(233,30,99,0.35)] text-white px-8 py-4 rounded-full font-bold transition-all duration-300 flex items-center justify-center gap-3 hover:scale-[1.02]">
-              <svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.04 2.26-.79 3.59-.76 1.56.04 2.87.65 3.66 1.76-3.15 1.76-2.58 5.76.4 7.02-.73 1.83-1.63 3.32-2.73 4.15zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>
-              App Store
+            <button onClick={() => window.location.href = "https://play.google.com/store/apps/details?id=com.woosh.in"} className="w-full sm:w-auto bg-gradient-to-r from-[#E91E63] to-[#9C27B0] hover:shadow-[0_8px_30px_rgba(233,30,99,0.35)] text-white px-8 py-4 rounded-full font-bold transition-all duration-300 flex items-center justify-center gap-3 hover:scale-[1.02]">
+              <svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
+                <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.61 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
+              </svg>
+              Passenger App
             </button>
-            <button onClick={() => window.location.href = "https://play.google.com/store/apps/details?id=com.woosh.in"} className="w-full sm:w-auto bg-transparent border-2 border-[#E91E63]/20 hover:border-[#E91E63]/40 hover:bg-[#FFF0F5] text-[#2D2D2D] px-8 py-4 rounded-full font-bold transition-all duration-300">
+            <button onClick={() => window.location.href = "https://play.google.com/store/apps/details?id=com.woosh.ride"} className="w-full sm:w-auto bg-transparent border-2 border-[#E91E63]/20 hover:border-[#E91E63]/40 hover:bg-[#FFF0F5] text-[#2D2D2D] px-8 py-4 rounded-full font-bold transition-all duration-300">
               <span className="flex items-center justify-center gap-3">
                 <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 text-[#E91E63]">
                   <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.61 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
                 </svg>
-                Play Store
+                Rider App
               </span>
             </button>
           </motion.div>
