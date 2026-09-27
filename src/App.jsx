@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from 'react';
 import Lenis from '@studio-freight/lenis';
-import { Navbar } from './components/layout/navbar';
 import { HeroSection } from './components/sections/hero-section';
 import { VideoSection } from './components/sections/video-section';
 import { FeaturesShowcase } from './components/sections/features-showcase';
@@ -41,7 +40,6 @@ function App() {
 
   return (
     <div className="min-h-screen bg-[#FFFBFD] text-[#2D2D2D] font-sans selection:bg-[#E91E63]/20 selection:text-[#E91E63]">
-      <Navbar />
       <main>
         <HeroSection />
         <VideoSection />
