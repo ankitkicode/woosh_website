@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 // Social media SVG icons
 const SocialIcon = ({ href, label, children }) => (
@@ -59,8 +60,8 @@ export const Footer = () => {
           <h3 className="text-white font-bold text-lg mb-6">Company</h3>
           <ul className="flex flex-col gap-4 text-white/60 text-[15px] font-medium">
             <li><a href="#" className="hover:text-white transition-colors">About Us</a></li>
-            <li><a href="#" className="hover:text-white transition-colors">Privacy Policy</a></li>
-            <li><a href="#" className="hover:text-white transition-colors">Terms of Use</a></li>
+            <li><Link to="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link></li>
+            <li><Link to="/terms" className="hover:text-white transition-colors">Terms of Use</Link></li>
             <li><a href="#" className="hover:text-white transition-colors">Help & Support</a></li>
             <li><a href="#" className="hover:text-white transition-colors">Contact Us</a></li>
             {/* <li><a href="#" className="hover:text-white transition-colors">Report a Fraud</a></li> */}

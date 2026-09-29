@@ -1,83 +1,109 @@
-import React from "react";
-import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import React, { useState } from "react";
 
 export const CtaSection = () => {
+  const [contactMethod, setContactMethod] = useState("phone");
+
   return (
-    <section className="pb-32">
-      <div className="container mx-auto px-6 max-w-6xl">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="relative rounded-[3rem] overflow-hidden aspect-[3/4] md:aspect-[21/10] p-8 md:p-16 flex flex-col md:flex-row justify-between md:items-center shadow-[0_20px_60px_rgba(233,30,99,0.2)]"
-        >
-          {/* Background Image */}
+    <section className="bg-[#FFFBFD] py-20 flex justify-center overflow-hidden">
+      <div className="container mx-auto px-6 max-w-5xl flex flex-col md:flex-row items-center justify-center gap-10 md:gap-20">
+        
+        {/* Left Side: Image */}
+        <div className="flex-1 w-full flex justify-center md:justify-start">
           <img 
-            src="/images/cta_background.jpg" 
-            alt="Abstract gradient background" 
-            className="absolute inset-0 w-full h-full object-cover"
+            src="/images/hero_illustration.jpg" 
+            alt="Woosh App" 
+            className="w-full max-w-[500px] aspect-square object-cover rounded-3xl shadow-[0_20px_60px_rgba(0,0,0,0.1)]"
           />
-          {/* Additional gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#1A0A10]/70 via-transparent to-transparent" />
-          
-          {/* Floating decorative elements */}
-          <div className="absolute top-10 right-10 w-20 h-20 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 animate-float" />
-          <div className="absolute bottom-20 right-[30%] w-12 h-12 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 animate-float" style={{ animationDelay: '2s' }} />
-          
-          {/* Left Content */}
-          <div className="relative z-10 w-full max-w-lg flex flex-col h-full justify-between md:justify-center gap-12">
-            <div>
-              <h2 className="text-4xl md:text-6xl font-bold tracking-tight text-white mb-6 leading-tight font-heading">
-                Open <br />the Woosh <br />Journal
-              </h2>
-              <p className="text-white/70 text-lg max-w-sm leading-relaxed font-medium">
-                We break down mobility safety and how much money you can save daily.
-              </p>
-            </div>
-            
-            <motion.button
-              whileHover={{ scale: 1.1, rotate: 10 }}
-              whileTap={{ scale: 0.95 }}
-              className="w-16 h-16 bg-gradient-to-r from-[#E91E63] to-[#9C27B0] text-white rounded-full flex items-center justify-center transition-all shadow-[0_8px_25px_rgba(233,30,99,0.4)]"
-            >
-              <ArrowRight className="w-8 h-8" />
-            </motion.button>
+        </div>
+
+        {/* Right Side: Content & Form */}
+        <div className="flex-1 flex flex-col items-center md:items-start text-center md:text-left">
+          <h2 className="text-4xl md:text-[2.8rem] font-medium text-[#1C1C1C] mb-4 tracking-tight leading-tight">
+            Get the Woosh app
+          </h2>
+          <p className="text-[#363636] text-[15px] md:text-base mb-8 max-w-md">
+            We will send you a link, open it on your phone to download the app
+          </p>
+
+          {/* Radio Buttons */}
+          <div className="flex items-center gap-6 mb-6">
+            <label className="flex items-center gap-2 cursor-pointer group">
+              <div className="w-5 h-5 rounded-full border border-gray-300 flex items-center justify-center group-hover:border-[#E91E63] transition-colors">
+                 {contactMethod === "email" && <div className="w-2.5 h-2.5 rounded-full bg-[#E91E63]" />}
+              </div>
+              <input 
+                type="radio" 
+                name="contactMethod" 
+                value="email" 
+                className="hidden" 
+                onChange={() => setContactMethod("email")}
+              />
+              <span className="text-gray-700 text-[15px]">Email</span>
+            </label>
+
+            <label className="flex items-center gap-2 cursor-pointer group">
+              <div className="w-5 h-5 rounded-full border border-gray-300 flex items-center justify-center group-hover:border-[#E91E63] transition-colors">
+                 {contactMethod === "phone" && <div className="w-2.5 h-2.5 rounded-full bg-[#E91E63]" />}
+              </div>
+              <input 
+                type="radio" 
+                name="contactMethod" 
+                value="phone" 
+                className="hidden" 
+                onChange={() => setContactMethod("phone")}
+              />
+              <span className="text-gray-700 text-[15px]">Phone</span>
+            </label>
           </div>
+
+          {/* Input & Button */}
+          <div className="flex flex-col sm:flex-row gap-3 w-full max-w-[400px] mb-8">
+            <input 
+              type={contactMethod === "email" ? "email" : "tel"} 
+              placeholder={contactMethod === "email" ? "Email" : "Phone"}
+              className="flex-1 bg-white border border-gray-300 rounded-lg px-4 py-3 text-gray-700 focus:outline-none focus:border-[#E91E63] focus:ring-1 focus:ring-[#E91E63] transition-all"
+            />
+            <button className="bg-[#EF4F5F] hover:bg-[#E23744] text-white px-6 py-3 rounded-lg font-medium transition-colors">
+              Share App Link
+            </button>
+          </div>
+
+          <div className="text-sm text-gray-400 mb-4">Download app from</div>
           
-          {/* Right Content (Form Card) */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3 }}
-            className="relative z-10 w-full max-w-sm mt-12 md:mt-0"
-          >
-            <div className="bg-white/95 backdrop-blur-xl rounded-3xl p-8 shadow-[0_12px_40px_rgba(0,0,0,0.15)] border border-white/50">
-              <h3 className="text-xl font-bold text-[#2D2D2D] mb-6 font-heading">Subscribe for updates</h3>
-              
-              <form className="relative flex items-center mb-6">
-                <input 
-                  type="email" 
-                  placeholder="you@example.com" 
-                  className="w-full bg-[#FFF0F5] border border-[#E91E63]/10 outline-none rounded-2xl py-4 pl-4 pr-[120px] text-base text-[#2D2D2D] placeholder:text-[#757575]/50 focus:ring-2 focus:ring-[#E91E63]/20 focus:border-[#E91E63]/30 transition-all"
-                  required
-                />
-                <button 
-                  type="submit"
-                  className="absolute right-2 bg-gradient-to-r from-[#E91E63] to-[#9C27B0] hover:shadow-[0_4px_15px_rgba(233,30,99,0.35)] text-white px-5 py-2.5 rounded-xl text-sm font-bold transition-all"
-                >
-                  Subscribe
-                </button>
-              </form>
-              
-              <p className="text-xs text-[#757575] leading-relaxed font-medium">
-                By subscribing, you agree to receive the Woosh newsletter. You can unsubscribe anytime.
-              </p>
-            </div>
-          </motion.div>
-          
-        </motion.div>
+          {/* App Store Buttons */}
+          <div className="flex items-center justify-center md:justify-start gap-4">
+             {/* App Store */}
+             <button onClick={() => window.location.href = "https://play.google.com/store/apps/details?id=com.woosh.ride"} className="bg-black hover:bg-gray-900 transition-colors rounded-xl overflow-hidden h-[40px] flex">
+                <div className="px-3 py-1 flex items-center justify-center">
+                  <svg viewBox="0 0 24 24" fill="white" className="w-6 h-6">
+                     <path d="M15.4 10.6c0-1.6 1.3-2.4 1.4-2.5-.7-1.1-1.9-1.3-2.3-1.3-1-.1-2 .6-2.5.6-.5 0-1.3-.6-2.1-.6-1.3 0-2.5.8-3.1 2-1.3 2.3-.3 5.7 1 7.5.6.9 1.3 1.9 2.3 1.8.9-.1 1.3-.7 2.4-.7s1.4.7 2.4.7c1 0 1.6-1 2.2-1.8.7-1 1-1.9 1-2-.1 0-2.6-1-2.6-3.7zM14.2 4.4c.5-.6.8-1.5.7-2.4-.8.1-1.7.5-2.2 1.1-.4.5-.8 1.4-.7 2.3.8 0 1.7-.5 2.2-1z" />
+                  </svg>
+                </div>
+                <div className="pr-3 pl-1 py-1 flex flex-col justify-center text-white text-left">
+                  <span className="text-[7px] leading-tight opacity-80">Download on the</span>
+                  <span className="text-xs font-semibold leading-tight -mt-0.5">App Store</span>
+                </div>
+             </button>
+
+             {/* Google Play */}
+             <button onClick={() => window.location.href = "https://play.google.com/store/apps/details?id=com.woosh.in"} className="bg-black hover:bg-gray-900 transition-colors rounded-xl overflow-hidden h-[40px] flex">
+                <div className="px-3 py-1 flex items-center justify-center">
+                  <svg viewBox="0 0 24 24" className="w-6 h-6">
+                     <path fill="#00c0ff" d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.61 3,21.09 3,20.5Z"/>
+                     <path fill="#ff3d00" d="M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12Z"/>
+                     <path fill="#ffc400" d="M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81Z"/>
+                     <path fill="#00e676" d="M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
+                  </svg>
+                </div>
+                <div className="pr-3 pl-1 py-1 flex flex-col justify-center text-white text-left">
+                  <span className="text-[7px] leading-tight opacity-80">GET IT ON</span>
+                  <span className="text-xs font-semibold leading-tight -mt-0.5">Google Play</span>
+                </div>
+             </button>
+          </div>
+
+        </div>
+
       </div>
     </section>
   );

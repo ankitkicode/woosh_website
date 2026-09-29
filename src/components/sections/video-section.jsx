@@ -5,18 +5,6 @@ export const VideoSection = () => {
   return (
     <section className="relative py-24 md:py-32 overflow-hidden bg-white">
       {/* Background Abstract Swirly Lines like Zomato (Cleaned up to avoid text) */}
-      <div className="absolute inset-0 z-0 pointer-events-none opacity-20">
-        <svg className="absolute w-full h-full" viewBox="0 0 1000 800" preserveAspectRatio="xMidYMid slice" fill="none">
-           {/* Top edge curve */}
-           <path d="M-100 150 C 300 -50, 700 150, 1100 50" stroke="#E91E63" strokeWidth="2" strokeDasharray="12 6" />
-           {/* Bottom edge curve */}
-           <path d="M-100 650 C 300 850, 700 600, 1100 750" stroke="#9C27B0" strokeWidth="1.5" />
-           {/* Left subtle curve */}
-           <path d="M50 -100 C 150 200, 100 600, -50 900" stroke="#E91E63" strokeWidth="1" opacity="0.5" />
-           {/* Right subtle curve */}
-           <path d="M1100 100 C 850 300, 950 600, 1100 900" stroke="#9C27B0" strokeWidth="1" opacity="0.5" />
-        </svg>
-      </div>
 
       {/* Floating Elements (Images from internet instead of emojis) */}
       <div className="absolute top-[15%] left-[5%] md:left-[15%] w-12 h-12 md:w-16 md:h-16 flex items-center justify-center animate-bounce-gentle z-0">
