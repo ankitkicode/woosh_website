@@ -48,7 +48,7 @@ export const Footer = () => {
         <div className="flex flex-col">
           <h3 className="text-white font-bold text-lg mb-6">Woosh Captains</h3>
           <ul className="flex flex-col gap-4 text-white/60 text-[15px] font-medium">
-            <li><a href="#" className="hover:text-white transition-colors">Register as a Captain</a></li>
+            <li><Link to="/rider-registration" className="hover:text-white transition-colors text-[#FF80AB] font-bold">Register as Rider</Link></li>
             <li><a href="#" className="hover:text-white transition-colors">Benefits</a></li>
             <li><a href="#" className="hover:text-white transition-colors">Captain Guidelines</a></li>
             <li><a href="#" className="hover:text-white transition-colors">Captain Support</a></li>
@@ -59,12 +59,9 @@ export const Footer = () => {
         <div className="flex flex-col">
           <h3 className="text-white font-bold text-lg mb-6">Company</h3>
           <ul className="flex flex-col gap-4 text-white/60 text-[15px] font-medium">
-            <li><a href="#" className="hover:text-white transition-colors">About Us</a></li>
             <li><Link to="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link></li>
             <li><Link to="/terms" className="hover:text-white transition-colors">Terms of Use</Link></li>
-            <li><a href="#" className="hover:text-white transition-colors">Help & Support</a></li>
-            <li><a href="#" className="hover:text-white transition-colors">Contact Us</a></li>
-            {/* <li><a href="#" className="hover:text-white transition-colors">Report a Fraud</a></li> */}
+            <li><Link to="/report-fraud" className="hover:text-white transition-colors">Report a Fraud</Link></li>
           </ul>
         </div>
 
