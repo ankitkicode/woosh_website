@@ -43,7 +43,7 @@ export const PolicyLayout = ({ children, title, toc, lastUpdated }) => {
         <div className="container mx-auto px-6 h-[72px] flex items-center justify-between max-w-[1400px]">
           <div className="flex items-center gap-8">
             <Link to="/" className="flex items-center">
-              <img src="/logo.png" alt="Woosh" className="h-8 object-contain" style={{ filter: 'brightness(0)' }} />
+              <img src="/logo.png" alt="Woosh" className="h-8 object-contain"  />
             </Link>
             
             {/* Minimal Header Links similar to Zomato */}
