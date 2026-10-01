@@ -3,10 +3,12 @@ import { Button } from "../ui/button";
 import { cn } from "../../lib/utils";
 import { useScroll } from "../../hooks/useScroll";
 import { motion, AnimatePresence } from "framer-motion";
+import { RiderRegistration } from "../../pages/rider-registration";
 
 export const Navbar = () => {
   const scrolled = useScroll(20);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [isRiderModalOpen, setIsRiderModalOpen] = useState(false);
 
   // Close mobile menu on resize
   useEffect(() => {
@@ -65,12 +67,12 @@ export const Navbar = () => {
 
         {/* CTA + Mobile Toggle */}
         <div className="flex items-center gap-3">
-          <a
-            href="/rider-registration"
+          <button
+            onClick={() => setIsRiderModalOpen(true)}
             className="text-sm font-semibold text-[#E91E63] hidden md:flex hover:underline"
           >
             Register as Rider
-          </a>
+          </button>
           <Button 
           onClick={() => window.location.href = "https://play.google.com/store/apps/details?id=com.woosh.in"}
            variant="primary" className="text-sm rounded-full px-6 py-2.5 font-semibold hidden md:flex">
@@ -130,6 +132,11 @@ export const Navbar = () => {
           </motion.div>
         )}
       </AnimatePresence>
+
+      <RiderRegistration 
+        isOpen={isRiderModalOpen} 
+        onClose={() => setIsRiderModalOpen(false)} 
+      />
     </header>
   );
 };

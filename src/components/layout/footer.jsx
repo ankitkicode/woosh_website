@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { ReportFraud } from "../../pages/ReportFraud";
+import { RiderRegistration } from "../../pages/rider-registration";
 
 // Social media SVG icons
 const SocialIcon = ({ href, label, children }) => (
@@ -15,6 +17,9 @@ const SocialIcon = ({ href, label, children }) => (
 );
 
 export const Footer = () => {
+  const [isReportModalOpen, setIsReportModalOpen] = useState(false);
+  const [isRiderModalOpen, setIsRiderModalOpen] = useState(false);
+  
   return (
     <footer className="bg-black pt-16 pb-6 flex flex-col items-center">
       
@@ -48,7 +53,11 @@ export const Footer = () => {
         <div className="flex flex-col">
           <h3 className="text-white font-bold text-lg mb-6">Woosh Captains</h3>
           <ul className="flex flex-col gap-4 text-white/60 text-[15px] font-medium">
-            <li><Link to="/rider-registration" className="hover:text-white transition-colors text-[#FF80AB] font-bold">Register as Rider</Link></li>
+            <li>
+              <button onClick={(e) => { e.preventDefault(); setIsRiderModalOpen(true); }} className="hover:text-white transition-colors text-[#FF80AB] font-bold text-left">
+                Register as Rider
+              </button>
+            </li>
             <li><a href="#" className="hover:text-white transition-colors">Benefits</a></li>
             <li><a href="#" className="hover:text-white transition-colors">Captain Guidelines</a></li>
             <li><a href="#" className="hover:text-white transition-colors">Captain Support</a></li>
@@ -61,7 +70,14 @@ export const Footer = () => {
           <ul className="flex flex-col gap-4 text-white/60 text-[15px] font-medium">
             <li><Link to="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link></li>
             <li><Link to="/terms" className="hover:text-white transition-colors">Terms of Use</Link></li>
-            <li><Link to="/report-fraud" className="hover:text-white transition-colors">Report a Fraud</Link></li>
+            <li>
+              <button 
+                onClick={() => setIsReportModalOpen(true)} 
+                className="hover:text-white transition-colors text-left"
+              >
+                Report a Fraud
+              </button>
+            </li>
           </ul>
         </div>
 
@@ -135,6 +151,15 @@ export const Footer = () => {
         </div>
       </div>
 
+      {/* Modals */}
+      <ReportFraud 
+        isOpen={isReportModalOpen} 
+        onClose={() => setIsReportModalOpen(false)} 
+      />
+      <RiderRegistration 
+        isOpen={isRiderModalOpen} 
+        onClose={() => setIsRiderModalOpen(false)} 
+      />
     </footer>
   );
 };

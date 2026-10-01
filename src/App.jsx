@@ -11,7 +11,6 @@ import { Footer } from './components/layout/footer';
 import { PrivacyPolicy } from './pages/PrivacyPolicy';
 import { TermsOfService } from './pages/TermsOfService';
 import { RiderRegistration } from './pages/rider-registration';
-import { ReportFraud } from './pages/ReportFraud';
 
 function ScrollToTop() {
   const { pathname } = window.location;
@@ -79,7 +78,6 @@ function App() {
         <Route path="/privacy" element={<PrivacyPolicy />} />
         <Route path="/terms" element={<TermsOfService />} />
         <Route path="/rider-registration" element={<RiderRegistration />} />
-        <Route path="/report-fraud" element={<ReportFraud />} />
       </Routes>
     </Router>
   );
