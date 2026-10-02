@@ -3,47 +3,154 @@ import { motion } from "framer-motion";
 
 export const VideoSection = () => {
   return (
-    <section className="relative py-24 md:py-32 overflow-hidden bg-white">
-      {/* Background Abstract Swirly Lines like Zomato (Cleaned up to avoid text) */}
-
-      {/* Floating Elements (Images from internet instead of emojis) */}
-      <div className="absolute top-[15%] left-[5%] md:left-[15%] w-12 h-12 md:w-16 md:h-16 flex items-center justify-center animate-bounce-gentle z-0">
-         <img src="https://cdn-icons-png.flaticon.com/512/1161/1161388.png" alt="shield" className="w-full h-full object-contain opacity-80 drop-shadow-md" />
-      </div>
-      
-      <div className="absolute top-[45%] right-[2%] md:right-[10%] w-16 h-16 md:w-20 md:h-20 flex items-center justify-center animate-bounce-gentle z-0" style={{ animationDelay: '1s' }}>
-         <img src="https://cdn-icons-png.flaticon.com/512/3063/3063822.png" alt="scooter" className="w-full h-full object-contain opacity-70 drop-shadow-md" />
-      </div>
-      
-      <div className="absolute top-[20%] right-[8%] md:right-[18%] w-10 h-10 md:w-12 md:h-12 flex items-center justify-center animate-bounce-gentle z-0" style={{ animationDelay: '2.5s' }}>
-         <img src="https://cdn-icons-png.flaticon.com/512/190/190411.png" alt="check" className="w-full h-full object-contain opacity-60 drop-shadow-md" />
-      </div>
-      
-      <div className="absolute top-[50%] left-[2%] md:left-[10%] w-14 h-14 md:w-16 md:h-16 flex items-center justify-center animate-bounce-gentle z-0" style={{ animationDelay: '1.5s' }}>
-         <img src="https://cdn-icons-png.flaticon.com/512/4140/4140047.png" alt="women" className="w-full h-full object-contain opacity-80 drop-shadow-md" />
-      </div>
-
+    <section className="relative py-20 md:py-28 overflow-hidden bg-white">
       <div className="container mx-auto px-6 relative z-10">
-        <div className="flex flex-col items-center justify-center text-center max-w-3xl mx-auto mb-16 md:mb-20">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-4xl md:text-[3.5rem] font-bold text-[#E91E63] mb-6 leading-[1.1] tracking-tight"
+        
+        {/* Mission Section - Two Column Layout */}
+        <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20 max-w-[1200px] mx-auto mb-20 md:mb-28">
+          
+          {/* Left Content */}
+          <div className="flex-1 w-full max-w-xl lg:max-w-none">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="flex items-center gap-3 mb-6"
+            >
+              <div className="w-8 h-[2px] bg-[#E91E63]" />
+              <span className="text-[#E91E63] text-sm font-bold uppercase tracking-widest">Our Mission</span>
+            </motion.div>
+
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="text-[2.5rem] leading-[1.1] md:text-[3.5rem] font-extrabold text-[#1A1A2E] tracking-tight mb-6"
+            >
+              Safe rides by women.{" "}
+              <span className="text-[#E91E63]">Real earnings for women.</span>
+            </motion.h2>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="text-lg md:text-xl text-[#666] font-medium leading-relaxed mb-10 max-w-lg"
+            >
+              Woosh is a two-wheeler taxi service run entirely by women, for women of every age and children under 14. Every rider is face-verified, every trip is tracked live, and every ride puts income directly in a woman's hands.
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="flex flex-wrap gap-4"
+            >
+              <button 
+                onClick={() => window.location.href = "https://play.google.com/store/apps/details?id=com.woosh.in"}
+                className="bg-[#E91E63] hover:bg-[#D81B60] text-white px-8 py-4 rounded-full font-bold text-base flex items-center gap-2 transition-all shadow-[0_8px_25px_rgba(233,30,99,0.25)] hover:shadow-[0_12px_35px_rgba(233,30,99,0.35)]"
+              >
+                Book a safe ride
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+              </button>
+              <button 
+                onClick={() => window.location.href = "https://play.google.com/store/apps/details?id=com.woosh.ride"}
+                className="bg-white hover:bg-gray-50 text-[#1A1A2E] border-2 border-gray-200 px-8 py-4 rounded-full font-bold text-base transition-all"
+              >
+                Become a rider
+              </button>
+            </motion.div>
+          </div>
+
+          {/* Right - App Mockup Card */}
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+            className="flex-1 w-full max-w-md lg:max-w-lg"
           >
-            Empowering women, <br className="hidden md:block" /> ensuring safety.
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-lg md:text-xl text-[#757575] font-medium leading-relaxed max-w-2xl"
-          >
-            Woosh aims to provide the safest and most trusted two-wheeler transportation service in India. By combining verified women riders and strict operational policies, we empower women with earning opportunities.
-          </motion.p>
+            <div className="bg-white rounded-3xl shadow-[0_20px_60px_rgba(0,0,0,0.08)] border border-gray-100 overflow-hidden">
+              {/* Map Area */}
+              <div className="relative h-48 bg-[#F8F8F8] overflow-hidden">
+                {/* Grid pattern for map */}
+                <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'linear-gradient(#ddd 1px, transparent 1px), linear-gradient(90deg, #ddd 1px, transparent 1px)', backgroundSize: '30px 30px' }}></div>
+                
+                {/* Route line */}
+                <svg className="absolute inset-0 w-full h-full" viewBox="0 0 400 200">
+                  <path d="M60 160 Q150 120 200 80 Q250 40 340 30" stroke="#E91E63" strokeWidth="3" fill="none" strokeDasharray="8,6" strokeLinecap="round" />
+                  <circle cx="60" cy="160" r="8" fill="white" stroke="#333" strokeWidth="2" />
+                  <circle cx="340" cy="30" r="10" fill="#E91E63" />
+                  <circle cx="340" cy="30" r="5" fill="white" />
+                </svg>
+
+                {/* Live tracking badge */}
+                <div className="absolute top-4 left-4 bg-white rounded-full px-4 py-2 shadow-md flex items-center gap-2">
+                  <div className="w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse" />
+                  <span className="text-sm font-semibold text-gray-800">Live tracking on</span>
+                </div>
+              </div>
+
+              {/* Ride Info */}
+              <div className="p-5 md:p-6">
+                {/* ETA + OTP */}
+                <div className="flex items-center justify-between mb-5">
+                  <div>
+                    <p className="text-xs text-gray-500 font-medium mb-0.5">Arriving in</p>
+                    <p className="text-3xl font-extrabold text-[#1A1A2E]">4 <span className="text-lg font-bold">min</span></p>
+                  </div>
+                  <div className="text-right">
+                    <p className="text-xs text-gray-500 font-medium mb-1.5">Share OTP on arrival</p>
+                    <div className="flex gap-1.5">
+                      {['4', '8', '2', '7'].map((d, i) => (
+                        <div key={i} className="w-9 h-9 rounded-lg bg-green-500 text-white flex items-center justify-center font-bold text-sm">
+                          {d}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Divider */}
+                <div className="h-[1px] w-full bg-gray-100 mb-5" />
+
+                {/* Rider Info */}
+                <div className="flex items-center gap-4 mb-5">
+                  <div className="w-12 h-12 rounded-full bg-[#E91E63] flex items-center justify-center text-white font-bold text-lg shrink-0">
+                    PS
+                  </div>
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2">
+                      <span className="font-bold text-[#1A1A2E] text-lg">Priya S.</span>
+                      <div className="w-5 h-5 rounded-full bg-green-500 flex items-center justify-center">
+                        <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
+                      </div>
+                    </div>
+                    <p className="text-sm text-gray-500">Face verified today · ID & licence checked</p>
+                  </div>
+                </div>
+
+                {/* Action Buttons */}
+                <div className="flex gap-3">
+                  <button className="flex-1 bg-gray-50 hover:bg-gray-100 border border-gray-200 text-gray-800 py-3 rounded-xl font-semibold text-sm flex items-center justify-center gap-2 transition-colors">
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" /></svg>
+                    Share trip
+                  </button>
+                  <button className="flex-1 bg-red-600 hover:bg-red-700 text-white py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-colors shadow-md">
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+                    SOS
+                  </button>
+                </div>
+              </div>
+            </div>
+          </motion.div>
         </div>
 
-        {/* Stats Card - Zomato Style */}
+        {/* Stats Card */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}

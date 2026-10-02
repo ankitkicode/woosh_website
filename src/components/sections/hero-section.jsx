@@ -3,127 +3,208 @@ import { motion } from "framer-motion";
 
 export const HeroSection = () => {
   return (
-    <section className="relative h-[100dvh] w-full flex items-center justify-center z-10 overflow-hidden bg-black">
-      {/* Background Video */}
-      <div className="absolute inset-0 z-0">
-        <video 
-          src="/video.mp4" 
-          autoPlay 
-          loop 
-          muted 
-          playsInline
-          className="w-full h-full object-cover"
-        />
-        {/* Dark overlay for text readability */}
-        <div className="absolute inset-0 bg-black/60 z-10" />
-      </div>
-
-      {/* Centered Content Desktop & Mobile Top */}
-      <div className="container mx-auto px-6 relative z-20 flex flex-col items-center justify-center text-center -mt-32 md:mt-32">
-        
-        {/* Brand Name / Logo */}
-        <motion.h1
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6 }}
-          className="text-6xl md:text-[7rem] font-bold text-[#E91E63] mb-4 italic tracking-tighter lowercase font-serif"
-        >
-          woosh
-        </motion.h1>
-
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="text-[2.5rem] leading-[1.1] md:text-6xl font-extrabold text-white mb-6 max-w-4xl tracking-tight"
-        >
-          India's safest <br className="md:hidden" /> <span className="text-[#E91E63]">bike taxi</span> platform
-        </motion.h2>
-        
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-lg md:text-2xl text-gray-200 mb-10 max-w-2xl font-medium px-4"
-        >
-          Designed exclusively for women. <br className="hidden md:block"/>The honest, secure way to commute every day.
-        </motion.p>
-        
-        {/* Buttons Desktop */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="hidden md:flex flex-row items-center gap-6"
-        >
-          {/* Passenger App Button */}
-          <button onClick={() => window.location.href = "https://play.google.com/store/apps/details?id=com.woosh.in"} className="bg-black/80 backdrop-blur-sm border border-white/20 text-white px-8 py-3.5 rounded-2xl font-bold flex items-center justify-center gap-4 hover:bg-black transition-all shadow-xl">
-            <svg viewBox="0 0 24 24" className="w-8 h-8">
-               <path fill="#00c0ff" d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.61 3,21.09 3,20.5Z"/>
-               <path fill="#ff3d00" d="M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12Z"/>
-               <path fill="#ffc400" d="M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81Z"/>
-               <path fill="#00e676" d="M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
-            </svg>
-            <div className="text-left">
-              <div className="text-[11px] font-medium leading-none uppercase text-gray-300 mb-1">Get it on</div>
-              <div className="text-lg leading-none font-semibold">Passenger App</div>
-            </div>
-          </button>
-          
-          {/* Rider App Button */}
-          <button onClick={() => window.location.href = "https://play.google.com/store/apps/details?id=com.woosh.ride"} className="bg-black/80 backdrop-blur-sm border border-white/20 text-white px-8 py-3.5 rounded-2xl font-bold flex items-center justify-center gap-4 hover:bg-black transition-all shadow-xl">
-            <svg viewBox="0 0 24 24" className="w-8 h-8">
-               <path fill="#00c0ff" d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.61 3,21.09 3,20.5Z"/>
-               <path fill="#ff3d00" d="M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12Z"/>
-               <path fill="#ffc400" d="M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81Z"/>
-               <path fill="#00e676" d="M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
-            </svg>
-            <div className="text-left">
-              <div className="text-[11px] font-medium leading-none uppercase text-gray-300 mb-1">Download</div>
-              <div className="text-lg leading-none font-semibold">Rider App</div>
-            </div>
-          </button>
-        </motion.div>
-
-      </div>
-
-      {/* Scroll down indicator for Desktop */}
-      <motion.div
-         initial={{ opacity: 0 }}
-         animate={{ opacity: 1 }}
-         transition={{ duration: 1, delay: 1 }}
-         className="hidden md:flex absolute bottom-8 left-1/2 -translate-x-1/2 flex-col items-center text-white/80 cursor-pointer z-20"
-         onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
+    <section className="relative min-h-[100svh] pt-28 md:pt-36 pb-16 overflow-hidden bg-[#FFFBFD] flex items-center">
+      {/* Background Map Grid (Light Theme) */}
+      <div 
+        className="absolute inset-0 z-0 opacity-[0.03]"
+        style={{ 
+          backgroundImage: 'linear-gradient(#1A1A2E 2px, transparent 2px), linear-gradient(90deg, #1A1A2E 2px, transparent 2px)', 
+          backgroundSize: '100px 100px',
+          backgroundPosition: 'center center'
+        }}
       >
-        <span className="text-sm font-semibold mb-2">Scroll down</span>
-        <svg className="w-5 h-5 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" /></svg>
-      </motion.div>
+        {/* Angled lines to simulate roads */}
+        <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
+          <line x1="0" y1="20%" x2="100%" y2="80%" stroke="#1A1A2E" strokeWidth="2" />
+          <line x1="100%" y1="10%" x2="0" y2="90%" stroke="#1A1A2E" strokeWidth="2" />
+          <line x1="30%" y1="0" x2="60%" y2="100%" stroke="#1A1A2E" strokeWidth="2" />
+        </svg>
+      </div>
 
-      {/* Mobile Bottom Card Overlay (Zomato Style) */}
-      <div className="md:hidden absolute bottom-0 left-0 w-full z-30 flex flex-col">
-        {/* Mobile Button Overlay */}
-        <div className="px-5 pb-6 w-full flex flex-col gap-3 z-40 relative translate-y-3">
-           <button onClick={() => window.location.href = "https://play.google.com/store/apps/details?id=com.woosh.in"} className="w-full bg-[#E91E63] text-white py-4 rounded-[14px] font-bold text-lg shadow-[0_8px_20px_rgba(233,30,99,0.25)] hover:opacity-90 active:scale-[0.98] transition-all">
-             Passenger App
-           </button>
-           <button onClick={() => window.location.href = "https://play.google.com/store/apps/details?id=com.woosh.ride"} className="w-full bg-white text-[#E91E63] border border-[#E91E63]/20 py-4 rounded-[14px] font-bold text-lg shadow-sm hover:bg-pink-50 active:scale-[0.98] transition-all">
-             Rider App
-           </button>
-        </div>
-        
-        {/* Bottom White Overlay matching Zomato's extra section */}
-        <div className="bg-white rounded-t-[1.5rem] p-5 pt-8 w-full shadow-[0_-10px_30px_rgba(0,0,0,0.08)] relative z-30 border-t border-gray-100">
-           <div className="flex items-center justify-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-pink-50 flex items-center justify-center border border-pink-100 shrink-0">
-                 <span className="text-lg">🛡️</span>
-              </div>
-              <div className="text-left">
-                 <h3 className="text-[1.1rem] font-bold text-[#E91E63] leading-tight">100% Verified Women Riders</h3>
-                 <p className="text-[#757575] text-xs font-medium">Safe & secure commute every day</p>
-              </div>
-           </div>
+      <div className="container mx-auto px-5 relative z-10 max-w-[1300px]">
+        <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
+          
+          {/* Left Content */}
+          <div className="flex-1 w-full max-w-xl lg:max-w-none">
+            {/* Onboarding Badge */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="inline-flex items-center gap-2 bg-white border border-gray-200 rounded-full px-4 py-2 mb-6 shadow-sm w-max max-w-full"
+            >
+              <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse shrink-0" />
+              <span className="text-xs sm:text-sm font-semibold text-[#1A1A2E] truncate">Now onboarding Queens in Bhopal</span>
+            </motion.div>
+
+            {/* Headline */}
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="text-[2.75rem] leading-[1.1] sm:text-5xl md:text-[4.5rem] lg:text-[5rem] font-extrabold text-[#1A1A2E] tracking-tight mb-5 md:mb-6"
+            >
+              The bike taxi <br />
+              built for <br />
+              <span className="text-[#E91E63]">women.</span>
+            </motion.h1>
+
+            {/* Description */}
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="text-base sm:text-lg md:text-xl text-gray-600 font-medium leading-relaxed mb-8 md:mb-10 max-w-lg"
+            >
+              Women riders. Women and children as passengers. Every trip face-verified, OTP-secured and tracked live, so your daily commute is finally designed around you.
+            </motion.p>
+
+            {/* CTA Buttons */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 mb-10"
+            >
+              <button 
+                onClick={() => window.location.href = "https://play.google.com/store/apps/details?id=com.woosh.in"}
+                className="w-full sm:w-auto bg-[#E91E63] hover:bg-[#D81B60] text-white px-8 py-3.5 md:py-4 rounded-xl sm:rounded-full font-bold text-base flex items-center justify-center gap-2 transition-all shadow-[0_8px_25px_rgba(233,30,99,0.3)] hover:shadow-[0_12px_30px_rgba(233,30,99,0.4)]"
+              >
+                <svg className="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                Book a ride
+              </button>
+              <button 
+                onClick={() => document.dispatchEvent(new CustomEvent('openRiderModal'))}
+                className="w-full sm:w-auto bg-white hover:bg-gray-50 text-[#1A1A2E] border border-gray-200 px-8 py-3.5 md:py-4 rounded-xl sm:rounded-full font-bold text-base flex items-center justify-center gap-2 transition-all shadow-sm hover:shadow-md"
+              >
+                <span className="text-xl leading-none shrink-0">👑</span>
+                Become a Queen
+              </button>
+            </motion.div>
+
+            {/* Trust Markers */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+              className="flex flex-col sm:flex-row sm:flex-wrap items-start sm:items-center gap-x-6 gap-y-3"
+            >
+              {[
+                "Face-verified women riders",
+                "Live tracking & SOS",
+                "Every ride insured"
+              ].map((text, i) => (
+                <div key={i} className="flex items-center gap-2">
+                  <svg className="w-4 h-4 text-[#E91E63] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+                  <span className="text-sm font-semibold text-gray-700">{text}</span>
+                </div>
+              ))}
+            </motion.div>
+          </div>
+
+          {/* Right - Interactive Map Graphic */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="flex-1 w-full relative h-[450px] md:h-[500px] lg:h-[600px] mt-4 lg:mt-0 max-w-lg mx-auto lg:max-w-none"
+          >
+            <div className="absolute inset-0 bg-white rounded-3xl md:rounded-[2.5rem] shadow-[0_20px_60px_rgba(0,0,0,0.08)] border border-gray-100 overflow-hidden">
+              
+              {/* Inner Map Grid */}
+              <div 
+                className="absolute inset-0 opacity-[0.04]"
+                style={{ 
+                  backgroundImage: 'linear-gradient(#1A1A2E 1.5px, transparent 1.5px), linear-gradient(90deg, #1A1A2E 1.5px, transparent 1.5px)', 
+                  backgroundSize: '40px 40px'
+                }}
+              />
+
+              {/* SVG Route Line */}
+              <svg className="absolute inset-0 w-full h-full" viewBox="0 0 500 600" preserveAspectRatio="xMidYMid slice">
+                <motion.path 
+                  initial={{ pathLength: 0 }}
+                  animate={{ pathLength: 1 }}
+                  transition={{ duration: 1.5, ease: "easeInOut", delay: 0.5 }}
+                  d="M120 450 C 150 350, 250 300, 250 250 C 250 200, 400 200, 420 150" 
+                  fill="none" 
+                  stroke="#E91E63" 
+                  strokeWidth="8"
+                  strokeLinecap="round"
+                />
+                <circle cx="120" cy="450" r="12" fill="white" stroke="#1A1A2E" strokeWidth="4" />
+                
+                {/* Ping animation at current location */}
+                <circle cx="250" cy="250" r="18" fill="#E91E63" opacity="0.2" className="animate-ping" style={{ animationDuration: '2s' }} />
+                <circle cx="250" cy="250" r="10" fill="#E91E63" />
+                <circle cx="250" cy="250" r="4" fill="white" />
+                
+                <circle cx="420" cy="150" r="10" fill="white" />
+              </svg>
+
+              {/* Rider Badge (Top Left) */}
+              <motion.div
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 1 }}
+                className="absolute top-4 sm:top-8 left-4 sm:left-6 bg-white p-2.5 sm:p-3 pr-4 sm:pr-5 rounded-2xl shadow-xl flex items-center gap-3 border border-gray-100 scale-90 sm:scale-100 origin-top-left"
+              >
+                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-pink-100 flex items-center justify-center text-[#E91E63] font-bold text-xs sm:text-sm shrink-0">
+                  MK
+                </div>
+                <div>
+                  <div className="flex items-center gap-1.5 mb-0.5">
+                    <span className="font-bold text-[#1A1A2E] text-sm">Meena K.</span>
+                    <div className="w-3.5 h-3.5 rounded-full bg-green-500 flex items-center justify-center">
+                      <svg className="w-2.5 h-2.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>
+                    </div>
+                  </div>
+                  <div className="text-[9px] sm:text-[10px] text-gray-500 font-medium">Face verified today · 2 min away</div>
+                </div>
+              </motion.div>
+
+              {/* OTP Box (Middle Right) */}
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 1.2 }}
+                className="absolute top-[35%] sm:top-[40%] right-4 sm:right-6 bg-white p-3 sm:p-4 rounded-xl sm:rounded-2xl shadow-xl border border-gray-100 scale-90 sm:scale-100 origin-right"
+              >
+                <div className="text-[9px] sm:text-[10px] font-bold text-gray-400 tracking-widest uppercase mb-1.5 sm:mb-2 text-center">Ride OTP</div>
+                <div className="flex gap-1.5">
+                  {['4', '8', '2', '7'].map((num, i) => (
+                    <div key={i} className="w-7 h-9 sm:w-8 sm:h-10 bg-pink-50 rounded-lg flex items-center justify-center text-[#E91E63] font-bold text-base sm:text-lg">
+                      {num}
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+
+              {/* SOS Bottom Bar */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 1.4 }}
+                className="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 right-4 sm:right-6 bg-[#1A1A2E] rounded-xl sm:rounded-2xl p-3 sm:p-4 flex items-center justify-between shadow-2xl"
+              >
+                <div className="flex items-center gap-2 sm:gap-3">
+                  <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-green-400 shadow-[0_0_10px_rgba(74,222,128,0.5)] shrink-0" />
+                  <div>
+                    <div className="text-white font-bold text-xs sm:text-sm mb-0.5 truncate max-w-[150px] sm:max-w-none">Live trip shared with Mom</div>
+                    <div className="text-gray-400 text-[10px] sm:text-xs">Drop in 6 min · on expected route</div>
+                  </div>
+                </div>
+                <button className="bg-red-600 hover:bg-red-700 text-white px-4 sm:px-5 py-2 rounded-lg sm:rounded-xl font-bold text-[10px] sm:text-xs tracking-wide transition-colors shrink-0 shadow-md">
+                  SOS
+                </button>
+              </motion.div>
+
+            </div>
+          </motion.div>
+
         </div>
       </div>
+
     </section>
   );
 };

@@ -87,7 +87,7 @@ export const ReportFraud = ({ isOpen, onClose }) => {
         </div>
 
         {/* Scrollable Content */}
-        <div className="p-6 md:p-8 overflow-y-auto">
+        <div className="p-6 md:p-8 overflow-y-auto" data-lenis-prevent="true">
           {isSuccess ? (
             <div className="bg-green-50 border border-green-200 text-green-800 rounded-xl p-8 max-w-lg text-center mx-auto my-8">
               <h2 className="text-2xl font-bold mb-3">Report Submitted</h2>

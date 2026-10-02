@@ -5,62 +5,34 @@
   <!-- Homepage -->
   <url>
     <loc>https://wooshride.in/</loc>
-    <lastmod>2026-09-12</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
       <image:loc>https://wooshride.in/logo.png</image:loc>
-      <image:title>Woosh Queens - Ride &amp; Earn</image:title>
+      <image:title>Woosh - Women-Only Bike Taxi in India</image:title>
       <image:caption>India's safest bike taxi platform for women and children</image:caption>
     </image:image>
     <image:image>
       <image:loc>https://wooshride.in/images/city_commute.jpg</image:loc>
       <image:title>Women riding Woosh bike taxis in an Indian city</image:title>
     </image:image>
-    <image:image>
-      <image:loc>https://wooshride.in/images/hero_illustration.jpg</image:loc>
-      <image:title>Woosh rider illustration</image:title>
-    </image:image>
   </url>
 
-  <!-- Overview Section -->
+  <!-- Privacy Policy -->
   <url>
-    <loc>https://wooshride.in/#overview</loc>
-    <lastmod>2026-09-12</lastmod>
+    <loc>https://wooshride.in/privacy</loc>
+    <lastmod>2026-09-28</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.5</priority>
   </url>
 
-  <!-- Features Section -->
+  <!-- Terms of Service -->
   <url>
-    <loc>https://wooshride.in/#features</loc>
-    <lastmod>2026-09-12</lastmod>
+    <loc>https://wooshride.in/terms</loc>
+    <lastmod>2026-09-28</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- Safety Section -->
-  <url>
-    <loc>https://wooshride.in/#safety</loc>
-    <lastmod>2026-09-12</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- Pricing Section -->
-  <url>
-    <loc>https://wooshride.in/#pricing</loc>
-    <lastmod>2026-09-12</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- FAQ Section -->
-  <url>
-    <loc>https://wooshride.in/#faq</loc>
-    <lastmod>2026-09-12</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.5</priority>
   </url>
 
 </urlset>

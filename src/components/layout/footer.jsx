@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ReportFraud } from "../../pages/ReportFraud";
 import { RiderRegistration } from "../../pages/rider-registration";
+import { RiderSupport } from "../../pages/RiderSupport";
+import { ContactUs } from "../../pages/ContactUs";
 
 // Social media SVG icons
 const SocialIcon = ({ href, label, children }) => (
@@ -19,11 +21,18 @@ const SocialIcon = ({ href, label, children }) => (
 export const Footer = () => {
   const [isReportModalOpen, setIsReportModalOpen] = useState(false);
   const [isRiderModalOpen, setIsRiderModalOpen] = useState(false);
+  const [isSupportModalOpen, setIsSupportModalOpen] = useState(false);
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
   
+  useEffect(() => {
+    const handleOpenRiderModal = () => setIsRiderModalOpen(true);
+    document.addEventListener('openRiderModal', handleOpenRiderModal);
+    return () => document.removeEventListener('openRiderModal', handleOpenRiderModal);
+  }, []);
+
   return (
     <footer className="bg-black pt-16 pb-6 flex flex-col items-center">
       
-      {/* Top Logo Section */}
       <div className="flex flex-col items-center mb-16 px-6">
         {/* Using the logo image they have */}
         <img 
@@ -34,8 +43,8 @@ export const Footer = () => {
         {/* <p className="text-white/60 text-sm md:text-base tracking-wide font-medium">Be Safe, Be Fearless</p> */}
       </div>
 
-      {/* 4 Columns */}
-      <div className="container mx-auto px-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 mb-16 w-full max-w-7mx">
+      {/* 4 Columns (2 columns on mobile) */}
+      <div className="container mx-auto px-8 grid grid-cols-2 lg:grid-cols-4 gap-12 mb-16 w-full max-w-[1200px]">
         
         {/* Column 1 */}
         <div className="flex flex-col">
@@ -60,7 +69,11 @@ export const Footer = () => {
             </li>
             <li><a href="#" className="hover:text-white transition-colors">Benefits</a></li>
             <li><a href="#" className="hover:text-white transition-colors">Captain Guidelines</a></li>
-            <li><a href="#" className="hover:text-white transition-colors">Captain Support</a></li>
+            <li>
+              <button onClick={() => setIsSupportModalOpen(true)} className="hover:text-white transition-colors text-left">
+                Captain Support
+              </button>
+            </li>
           </ul>
         </div>
 
@@ -76,6 +89,14 @@ export const Footer = () => {
                 className="hover:text-white transition-colors text-left"
               >
                 Report a Fraud
+              </button>
+            </li>
+            <li>
+              <button 
+                onClick={() => setIsContactModalOpen(true)} 
+                className="hover:text-white transition-colors text-left"
+              >
+                Contact Us
               </button>
             </li>
           </ul>
@@ -104,37 +125,31 @@ export const Footer = () => {
                 <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
               </svg>
             </SocialIcon>
-            {/* X (Twitter) */}
-            <SocialIcon href="https://twitter.com/wooshqueens" label="X (Twitter)">
-              <svg className="w-[1.125rem] h-[1.125rem] fill-current" viewBox="0 0 24 24">
-                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-              </svg>
-            </SocialIcon>
           </div>
 
           <div className="flex flex-col gap-4">
             {/* App Store Button */}
-            <button onClick={() => window.location.href = "https://play.google.com/store/apps/details?id=com.woosh.ride"} className="bg-black border border-white/20 text-white rounded-xl flex items-center gap-3.5 px-4 py-2 hover:bg-white/5 transition-colors w-[160px]">
-              <svg viewBox="0 0 24 24" fill="currentColor" className="w-8 h-8">
+            <button onClick={() => window.open('https://apps.apple.com/app/idXXXXX', '_blank')} className="bg-black border border-white/20 text-white rounded-xl flex items-center gap-3.5 px-3 sm:px-4 py-2 hover:bg-white/5 transition-colors w-full max-w-[160px]">
+              <svg viewBox="0 0 24 24" fill="currentColor" className="w-7 h-7 sm:w-8 sm:h-8 shrink-0">
                  <path d="M15.4 10.6c0-1.6 1.3-2.4 1.4-2.5-.7-1.1-1.9-1.3-2.3-1.3-1-.1-2 .6-2.5.6-.5 0-1.3-.6-2.1-.6-1.3 0-2.5.8-3.1 2-1.3 2.3-.3 5.7 1 7.5.6.9 1.3 1.9 2.3 1.8.9-.1 1.3-.7 2.4-.7s1.4.7 2.4.7c1 0 1.6-1 2.2-1.8.7-1 1-1.9 1-2-.1 0-2.6-1-2.6-3.7zM14.2 4.4c.5-.6.8-1.5.7-2.4-.8.1-1.7.5-2.2 1.1-.4.5-.8 1.4-.7 2.3.8 0 1.7-.5 2.2-1z" />
               </svg>
               <div className="text-left">
-                 <div className="text-[9px] leading-tight text-white/90">Download on the</div>
-                 <div className="text-[15px] font-semibold leading-tight">App Store</div>
+                 <div className="text-[8px] sm:text-[9px] leading-tight text-white/90">Download on the</div>
+                 <div className="text-[13px] sm:text-[15px] font-semibold leading-tight">App Store</div>
               </div>
             </button>
 
             {/* Google Play Button */}
-            <button onClick={() => window.location.href = "https://play.google.com/store/apps/details?id=com.woosh.in"} className="bg-black border border-white/20 text-white rounded-xl flex items-center gap-3.5 px-4 py-2 hover:bg-white/5 transition-colors w-[160px]">
-              <svg viewBox="0 0 24 24" className="w-8 h-8">
+            <button onClick={() => window.open('https://play.google.com/store/apps/details?id=com.woosh.in', '_blank')} className="bg-black border border-white/20 text-white rounded-xl flex items-center gap-3.5 px-3 sm:px-4 py-2 hover:bg-white/5 transition-colors w-full max-w-[160px]">
+              <svg viewBox="0 0 24 24" className="w-7 h-7 sm:w-8 sm:h-8 shrink-0">
                  <path fill="#00c0ff" d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.61 3,21.09 3,20.5Z"/>
                  <path fill="#ff3d00" d="M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12Z"/>
                  <path fill="#ffc400" d="M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81Z"/>
                  <path fill="#00e676" d="M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
               </svg>
               <div className="text-left">
-                 <div className="text-[9px] leading-tight text-white/90">GET IT ON</div>
-                 <div className="text-[15px] font-semibold leading-tight">Google Play</div>
+                 <div className="text-[8px] sm:text-[9px] leading-tight text-white/90">GET IT ON</div>
+                 <div className="text-[13px] sm:text-[15px] font-semibold leading-tight">Google Play</div>
               </div>
             </button>
           </div>
@@ -159,6 +174,14 @@ export const Footer = () => {
       <RiderRegistration 
         isOpen={isRiderModalOpen} 
         onClose={() => setIsRiderModalOpen(false)} 
+      />
+      <RiderSupport 
+        isOpen={isSupportModalOpen} 
+        onClose={() => setIsSupportModalOpen(false)} 
+      />
+      <ContactUs 
+        isOpen={isContactModalOpen} 
+        onClose={() => setIsContactModalOpen(false)} 
       />
     </footer>
   );

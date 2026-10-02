@@ -125,7 +125,7 @@ export const Navbar = () => {
                   {item}
                 </motion.a>
               ))}
-              <Button variant="primary" className="mt-2 w-full rounded-full py-3 font-semibold">
+              <Button onClick={() => window.location.href = "https://play.google.com/store/apps/details?id=com.woosh.in"} variant="primary" className="mt-2 w-full rounded-full py-3 font-semibold">
                 Get the app
               </Button>
             </div>

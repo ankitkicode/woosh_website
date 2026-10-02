@@ -4,13 +4,15 @@ import Lenis from '@studio-freight/lenis';
 import { HeroSection } from './components/sections/hero-section';
 import { VideoSection } from './components/sections/video-section';
 import { FeaturesShowcase } from './components/sections/features-showcase';
-import { PricingSection } from './components/sections/pricing-section';
+import { RidersSection } from './components/sections/riders-section';
 import { FaqSection } from './components/sections/faq-section';
-import { CtaSection } from './components/sections/cta-section';
+import { SafetyFeatures } from './components/sections/safety-features';
+import { FareBooking } from './components/sections/fare-booking';
+import { ChildMode } from './components/sections/child-mode';
+import { InsuranceSupport } from './components/sections/insurance-support';
 import { Footer } from './components/layout/footer';
 import { PrivacyPolicy } from './pages/PrivacyPolicy';
 import { TermsOfService } from './pages/TermsOfService';
-import { RiderRegistration } from './pages/rider-registration';
 
 function ScrollToTop() {
   const { pathname } = window.location;
@@ -24,10 +26,13 @@ const Home = () => (
   <div className="min-h-screen bg-[#FFFBFD] text-[#2D2D2D] font-sans selection:bg-[#E91E63]/20 selection:text-[#E91E63]">
     <main>
       <HeroSection />
-      <VideoSection />
       <FeaturesShowcase />
+      <RidersSection />
+      <SafetyFeatures />
+      <FareBooking />
+      <ChildMode />
+      <InsuranceSupport />
       <FaqSection />
-      <CtaSection />
     </main>
     <Footer />
     
@@ -77,7 +82,6 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/privacy" element={<PrivacyPolicy />} />
         <Route path="/terms" element={<TermsOfService />} />
-        <Route path="/rider-registration" element={<RiderRegistration />} />
       </Routes>
     </Router>
   );
