@@ -1,27 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X } from 'lucide-react';
+import { X, CheckCircle2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export const RiderRegistration = ({ isOpen, onClose }) => {
   const [loading, setLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-  const [isOtpStep, setIsOtpStep] = useState(false);
+  
+  // OTP States
+  const [isOtpSent, setIsOtpSent] = useState(false);
+  const [isPhoneVerified, setIsPhoneVerified] = useState(false);
   const [otp, setOtp] = useState('');
   const [otpError, setOtpError] = useState('');
+  const [otpLoading, setOtpLoading] = useState(false);
+  
   const [cities, setCities] = useState([{ _id: 'bhopal', name: 'Bhopal' }]);
+  const [token, setToken] = useState('');
   
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
-    gender: 'Female',
+    gender: 'female',
     city: 'Bhopal',
     areas: '',
     age: ''
   });
   const [errors, setErrors] = useState({});
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (isOpen) {
       const fetchCities = async () => {
         try {
@@ -42,21 +48,27 @@ export const RiderRegistration = ({ isOpen, onClose }) => {
 
   if (!isOpen) return null;
 
-  const validate = () => {
-    const newErrors = {};
-    if (!formData.name.trim()) newErrors.name = 'Name is required';
-    if (!formData.phone.trim() || !/^\d{10}$/.test(formData.phone)) newErrors.phone = 'Valid 10-digit number required';
-    if (!formData.age.trim() || isNaN(formData.age) || Number(formData.age) < 18) newErrors.age = 'Must be 18 or older';
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+  const handleReset = () => {
+    setIsSuccess(false);
+    setIsOtpSent(false);
+    setIsPhoneVerified(false);
+    setOtp('');
+    setOtpError('');
+    setToken('');
+    setFormData({ name: '', phone: '', gender: 'female', city: cities[0]?.name || 'Bhopal', areas: '', age: '' });
+    setErrors({});
+    if (onClose) onClose();
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!validate()) return;
+  const handleSendOtp = async (e) => {
+    e?.preventDefault();
+    if (!formData.phone.trim() || !/^\d{10}$/.test(formData.phone)) {
+      setErrors({ phone: 'Valid 10-digit number required' });
+      return;
+    }
 
     try {
-      setLoading(true);
+      setOtpLoading(true);
       const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000';
       const res = await fetch(`${API_BASE}/auth/send-otp`, {
         method: 'POST',
@@ -64,31 +76,32 @@ export const RiderRegistration = ({ isOpen, onClose }) => {
         body: JSON.stringify({ phoneNumber: formData.phone, role: 'rider' })
       });
       if (res.ok) {
-        setIsOtpStep(true);
+        setIsOtpSent(true);
+        setOtpError('');
+        if (errors.phone) setErrors(prev => ({ ...prev, phone: '' }));
       } else {
-        alert('Something went wrong. Please try again.');
+        setOtpError('Failed to send OTP');
       }
     } catch (err) {
       console.error(err);
-      alert('Network error. Please try again.');
+      setOtpError('Network error');
     } finally {
-      setLoading(false);
+      setOtpLoading(false);
     }
   };
 
   const handleVerifyOtp = async (e) => {
-    e.preventDefault();
+    e?.preventDefault();
     if (!otp.trim() || otp.length < 4) {
-      setOtpError('Please enter a valid OTP');
+      setOtpError('Enter a valid OTP');
       return;
     }
 
     try {
-      setLoading(true);
+      setOtpLoading(true);
       setOtpError('');
       const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000';
       
-      // Step 1: Verify OTP
       const verifyRes = await fetch(`${API_BASE}/auth/verify-otp`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -97,22 +110,45 @@ export const RiderRegistration = ({ isOpen, onClose }) => {
       const verifyData = await verifyRes.json();
       
       if (!verifyRes.ok) {
-        setOtpError(verifyData?.message || 'Invalid OTP. Please try again.');
-        setLoading(false);
+        setOtpError(verifyData?.message || 'Invalid OTP');
+        setOtpLoading(false);
         return;
       }
 
-      // Extract token
-      const token = verifyData?.data?.token || verifyData?.token;
+      const receivedToken = verifyData?.data?.accessToken || verifyData?.accessToken;
+      setToken(receivedToken);
+      setIsPhoneVerified(true);
+      setIsOtpSent(false); // hide OTP input since verified
       
+    } catch (err) {
+      console.error(err);
+      setOtpError('Network error');
+    } finally {
+      setOtpLoading(false);
+    }
+  };
+
+  const validateForm = () => {
+    const newErrors = {};
+    if (!isPhoneVerified) newErrors.phone = 'Please verify your phone number first';
+    if (!formData.name.trim()) newErrors.name = 'Name is required';
+    if (!formData.age.trim() || isNaN(formData.age) || Number(formData.age) < 18) newErrors.age = 'Must be 18 or older';
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!validateForm()) return;
+
+    try {
+      setLoading(true);
+      const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000';
       const authHeaders = {
         'Content-Type': 'application/json',
       };
-      if (token) {
-        authHeaders['Authorization'] = `Bearer ${token}`;
-      }
+      if (token) authHeaders['Authorization'] = `Bearer ${token}`;
 
-      // Step 2: Update Profile
       const profileEndpoint = `${API_BASE}/rider/profile`; 
       const profileRes = await fetch(profileEndpoint, {
         method: 'PUT',
@@ -140,12 +176,11 @@ export const RiderRegistration = ({ isOpen, onClose }) => {
          });
       }
 
-      setIsOtpStep(false);
       setIsSuccess(true);
       
     } catch (err) {
       console.error(err);
-      setOtpError('Network error during verification. Please try again.');
+      alert('Network error. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -155,16 +190,6 @@ export const RiderRegistration = ({ isOpen, onClose }) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
     if (errors[name]) setErrors(prev => ({ ...prev, [name]: '' }));
-  };
-
-  const handleReset = () => {
-    setIsSuccess(false);
-    setIsOtpStep(false);
-    setOtp('');
-    setOtpError('');
-    setFormData({ name: '', phone: '', gender: 'Female', city: cities[0]?.name || 'Bhopal', areas: '', age: '' });
-    setErrors({});
-    if (onClose) onClose();
   };
 
   return (
@@ -221,57 +246,13 @@ export const RiderRegistration = ({ isOpen, onClose }) => {
                     </button>
                   </div>
                 </div>
-              ) : isOtpStep ? (
-                <div className="text-center py-4">
-                  <div className="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <svg className="w-8 h-8 text-[#E91E63]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>
-                  </div>
-                  <h3 className="text-2xl font-bold text-[#1A1A2E] mb-2">Verify your number</h3>
-                  <p className="text-gray-500 mb-6 text-[15px]">We've sent a code to +91 {formData.phone}</p>
-
-                  <form onSubmit={handleVerifyOtp} className="space-y-5">
-                    <div>
-                      <input
-                        type="text"
-                        maxLength="6"
-                        value={otp}
-                        onChange={(e) => setOtp(e.target.value.replace(/\D/g, ''))}
-                        placeholder="Enter OTP"
-                        className={`w-full text-center tracking-widest text-xl font-bold border ${otpError ? 'border-red-400' : 'border-gray-200'} rounded-xl px-4 py-4 text-gray-800 focus:outline-none focus:border-[#E91E63] focus:ring-1 focus:ring-[#E91E63] transition-all bg-gray-50`}
-                      />
-                      {otpError && <p className="text-red-500 text-xs mt-2 text-left">{otpError}</p>}
-                    </div>
-
-                    <button
-                      type="submit"
-                      disabled={loading || !otp}
-                      className="w-full bg-[#E91E63] hover:bg-[#D81B60] text-white py-3.5 rounded-xl font-bold text-[15px] disabled:opacity-60 transition-all shadow-md flex items-center justify-center mt-2"
-                    >
-                      {loading ? (
-                        <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                      ) : (
-                        'Verify & Complete Registration'
-                      )}
-                    </button>
-                    
-                    <button 
-                      type="button" 
-                      onClick={() => setIsOtpStep(false)}
-                      className="text-gray-500 text-sm font-semibold hover:text-[#E91E63] transition-colors mt-6"
-                    >
-                      Change phone number
-                    </button>
-                  </form>
-                </div>
               ) : (
                 <>
-                  {/* Header Badge */}
                   <div className="flex items-center gap-2 mb-4">
                     <span className="bg-[#FFF0F5] text-[#E91E63] text-xs font-bold uppercase tracking-wider px-3 py-1.5 rounded-full flex items-center gap-1.5">
                       👑 Queen Registration
                     </span>
                   </div>
-
                   <h2 className="text-2xl font-extrabold text-[#1A1A2E] mb-1">Become a Woosh Queen</h2>
                   <p className="text-gray-500 text-[15px] mb-7">Takes under a minute. Our team will call you to complete your registration.</p>
 
@@ -290,27 +271,79 @@ export const RiderRegistration = ({ isOpen, onClose }) => {
                       {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
                     </div>
 
-                    {/* Phone Number */}
+                    {/* Phone Number inline with Send OTP */}
                     <div>
                       <label className="block text-sm font-semibold text-gray-800 mb-1.5">Phone number</label>
-                      <div className="flex">
-                        <span className="inline-flex items-center px-4 rounded-l-xl border border-r-0 border-gray-200 bg-gray-50 text-gray-500 text-sm font-semibold">
+                      <div className="flex shadow-sm rounded-xl">
+                        <span className="inline-flex items-center px-3 sm:px-4 rounded-l-xl border border-r-0 border-gray-200 bg-gray-50 text-gray-500 text-sm font-semibold">
                           +91
                         </span>
                         <input
                           type="text"
                           name="phone"
                           maxLength="10"
+                          disabled={isPhoneVerified}
                           value={formData.phone}
                           onChange={(e) => {
                             const val = e.target.value.replace(/\D/g, '');
                             handleChange({ target: { name: 'phone', value: val } });
+                            if (isOtpSent) setIsOtpSent(false);
                           }}
                           placeholder="10-digit mobile number"
-                          className={`flex-1 w-full border ${errors.phone ? 'border-red-400' : 'border-gray-200'} rounded-r-xl px-4 py-3 text-[15px] text-gray-800 focus:outline-none focus:border-[#E91E63] focus:ring-1 focus:ring-[#E91E63] transition-all placeholder:text-gray-400`}
+                          className={`flex-1 min-w-0 border ${errors.phone ? 'border-red-400' : 'border-gray-200'} ${isPhoneVerified ? 'bg-gray-50' : 'border-r-0'} px-3 sm:px-4 py-3 text-[15px] text-gray-800 focus:outline-none focus:border-[#E91E63] focus:ring-1 focus:ring-[#E91E63] transition-all placeholder:text-gray-400`}
                         />
+                        {isPhoneVerified ? (
+                          <div className="flex items-center justify-center px-4 border border-l-0 border-gray-200 rounded-r-xl bg-green-50 text-green-600">
+                            <CheckCircle2 className="w-5 h-5" />
+                          </div>
+                        ) : (
+                          <button
+                            type="button"
+                            onClick={handleSendOtp}
+                            disabled={otpLoading || !formData.phone || formData.phone.length < 10}
+                            className="px-4 sm:px-5 bg-[#E91E63] hover:bg-[#D81B60] text-white font-semibold text-[13px] sm:text-sm rounded-r-xl transition-colors whitespace-nowrap disabled:opacity-60"
+                          >
+                            {otpLoading && !isOtpSent ? 'Sending...' : isOtpSent ? 'Resend' : 'Send OTP'}
+                          </button>
+                        )}
                       </div>
                       {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
+                      
+                      {/* Inline OTP Input */}
+                      <AnimatePresence>
+                        {isOtpSent && !isPhoneVerified && (
+                          <motion.div 
+                            initial={{ opacity: 0, height: 0, marginTop: 0 }} 
+                            animate={{ opacity: 1, height: 'auto', marginTop: 12 }} 
+                            exit={{ opacity: 0, height: 0, marginTop: 0 }}
+                            className="overflow-hidden"
+                          >
+                            <label className="block text-sm font-semibold text-gray-800 mb-1.5">Enter OTP</label>
+                            <div className="flex shadow-sm rounded-xl">
+                              <input
+                                type="text"
+                                maxLength="6"
+                                value={otp}
+                                onChange={(e) => {
+                                  setOtp(e.target.value.replace(/\D/g, ''));
+                                  setOtpError('');
+                                }}
+                                placeholder="6-digit code"
+                                className={`flex-1 w-full border ${otpError ? 'border-red-400' : 'border-gray-200'} border-r-0 rounded-l-xl px-4 py-3 text-[15px] tracking-widest font-semibold text-gray-800 focus:outline-none focus:border-[#E91E63] focus:ring-1 focus:ring-[#E91E63] transition-all`}
+                              />
+                              <button
+                                type="button"
+                                onClick={handleVerifyOtp}
+                                disabled={otpLoading || !otp || otp.length < 4}
+                                className="px-6 bg-[#1A1A2E] hover:bg-black text-white font-semibold text-sm rounded-r-xl transition-colors whitespace-nowrap disabled:opacity-60"
+                              >
+                                {otpLoading ? '...' : 'Verify'}
+                              </button>
+                            </div>
+                            {otpError && <p className="text-red-500 text-xs mt-1">{otpError}</p>}
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
                     </div>
 
                     {/* Gender */}
@@ -383,7 +416,7 @@ export const RiderRegistration = ({ isOpen, onClose }) => {
                     {/* Submit */}
                     <button
                       type="submit"
-                      disabled={loading}
+                      disabled={loading || !isPhoneVerified}
                       className="w-full bg-[#E91E63] hover:bg-[#D81B60] text-white py-3.5 rounded-xl font-bold text-[15px] disabled:opacity-60 transition-all shadow-md hover:shadow-lg flex items-center justify-center"
                     >
                       {loading ? (

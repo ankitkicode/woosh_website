@@ -50,11 +50,11 @@ export const Footer = () => {
         <div className="flex flex-col">
           <h3 className="text-white font-bold text-lg mb-6">Why Woosh?</h3>
           <ul className="flex flex-col gap-4 text-white/60 text-[15px] font-medium">
-            <li><a href="#" className="hover:text-white transition-colors">How Woosh Works</a></li>
-            <li><a href="#" className="hover:text-white transition-colors">Safety Features</a></li>
-            <li><a href="#" className="hover:text-white transition-colors">Fare & Booking</a></li>
-            <li><a href="#" className="hover:text-white transition-colors">Child Mode</a></li>
-            <li><a href="#" className="hover:text-white transition-colors">Insurance & Support</a></li>
+            <li><a href="#how-it-works" className="hover:text-white transition-colors">How Woosh Works</a></li>
+            <li><a href="#safety" className="hover:text-white transition-colors">Safety Features</a></li>
+            <li><a href="#fare-booking" className="hover:text-white transition-colors">Fare & Booking</a></li>
+            <li><a href="#child-mode" className="hover:text-white transition-colors">Child Mode</a></li>
+            <li><a href="#insurance-support" className="hover:text-white transition-colors">Insurance & Support</a></li>
           </ul>
         </div>
 
@@ -83,14 +83,7 @@ export const Footer = () => {
           <ul className="flex flex-col gap-4 text-white/60 text-[15px] font-medium">
             <li><Link to="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link></li>
             <li><Link to="/terms" className="hover:text-white transition-colors">Terms of Use</Link></li>
-            <li>
-              <button 
-                onClick={() => setIsReportModalOpen(true)} 
-                className="hover:text-white transition-colors text-left"
-              >
-                Report a Fraud
-              </button>
-            </li>
+
             <li>
               <button 
                 onClick={() => setIsContactModalOpen(true)} 
