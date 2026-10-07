@@ -197,11 +197,13 @@ export const RiderRegistration = ({ isOpen, onClose }) => {
     setFormData(prev => {
       const isSelected = prev.areas.includes(area);
       if (isSelected) {
-        return { ...prev, areas: prev.areas.filter(a => a !== area) };
+        return { ...prev, areas: [] };
       } else {
-        return { ...prev, areas: [...prev.areas, area] };
+        return { ...prev, areas: [area] };
       }
     });
+    // Close dropdown automatically after selecting since it's single select
+    setIsAreaDropdownOpen(false);
   };
 
   const selectedCityData = cities.find(c => c.name === formData.city);
@@ -452,10 +454,11 @@ export const RiderRegistration = ({ isOpen, onClose }) => {
                                   return (
                                     <label key={area} className="flex items-center px-4 py-2.5 hover:bg-pink-50 cursor-pointer transition-colors border-b border-gray-50 last:border-0">
                                       <input 
-                                        type="checkbox" 
+                                        type="radio"
+                                        name="selected_area"
                                         checked={isSelected}
                                         onChange={() => handleAreaToggle(area)}
-                                        className="mr-3 w-4 h-4 text-[#E91E63] rounded border-gray-300 focus:ring-[#E91E63]"
+                                        className="mr-3 w-4 h-4 text-[#E91E63] border-gray-300 focus:ring-[#E91E63]"
                                       />
                                       <span className={`text-sm ${isSelected ? 'font-semibold text-[#E91E63]' : 'text-gray-700'}`}>{area}</span>
                                     </label>
