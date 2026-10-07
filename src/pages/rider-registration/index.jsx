@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 export const RiderRegistration = ({ isOpen, onClose }) => {
   const [loading, setLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [lang, setLang] = useState('en');
   
   // OTP States
   const [isOtpSent, setIsOtpSent] = useState(false);
@@ -209,6 +210,88 @@ export const RiderRegistration = ({ isOpen, onClose }) => {
   const selectedCityData = cities.find(c => c.name === formData.city);
   const availableAreas = selectedCityData?.areas || [];
 
+  const t = {
+    en: {
+      badge: '👑 Queen Registration',
+      title: 'Become a Woosh Queen',
+      subtitle: 'Takes under a minute. Our team will call you to complete your registration.',
+      fullName: 'Full name',
+      namePlaceholder: 'As on your driving licence',
+      nameRequired: 'Name is required',
+      phone: 'Phone number',
+      phonePlaceholder: '10-digit mobile number',
+      phoneRequired: 'Valid 10-digit number required',
+      phoneVerify: 'Please verify your phone number first',
+      sendOtp: 'Send OTP',
+      resend: 'Resend',
+      otpPlaceholder: 'Enter 6-digit code',
+      verify: 'Verify',
+      gender: 'Gender',
+      female: 'Female',
+      genderNote: 'Woosh Queens is a women-only rider community.',
+      city: 'City',
+      cityNote: 'Currently onboarding in',
+      cityNoteEnd: 'only.',
+      age: 'Age',
+      agePlaceholder: 'Your age in years',
+      ageError: 'Must be 18 or older',
+      areas: 'Covered Areas',
+      noAreas: 'No areas configured',
+      selectAreas: 'Select areas',
+      submit: 'Register as a Queen',
+      footer: 'By registering, you agree to be contacted by Woosh about riding.',
+      privacy: 'Privacy Policy',
+      successTitle: 'Basic Registration Complete!',
+      successMsg: 'Thank you for starting your journey with Woosh Queens.',
+      nextSteps: 'Next Steps',
+      step1: 'Download the <strong>Woosh Captain</strong> app from the Google Play Store.',
+      step2: 'Log in using your registered mobile number',
+      step3: 'Upload your KYC documents and vehicle details directly in the app to complete verification.',
+      downloadApp: 'Download App',
+      close: 'Close',
+    },
+    hi: {
+      badge: '👑 क्वीन रजिस्ट्रेशन',
+      title: 'Become a Woosh Queen',
+      subtitle: 'एक मिनट से भी कम समय लगेगा। हमारी टीम आपका रजिस्ट्रेशन पूरा करने के लिए कॉल करेगी।',
+      fullName: 'पूरा नाम',
+      namePlaceholder: 'जैसा आपके ड्राइविंग लाइसेंस पर है',
+      nameRequired: 'नाम आवश्यक है',
+      phone: 'फ़ोन नंबर',
+      phonePlaceholder: '10 अंकों का मोबाइल नंबर',
+      phoneRequired: 'सही 10 अंकों का नंबर डालें',
+      phoneVerify: 'पहले अपना फ़ोन नंबर वेरिफाई करें',
+      sendOtp: 'OTP भेजें',
+      resend: 'दोबारा भेजें',
+      otpPlaceholder: '6 अंकों का कोड डालें',
+      verify: 'वेरिफाई करें',
+      gender: 'लिंग',
+      female: 'महिला',
+      genderNote: 'वूश क्वीन्स केवल महिलाओं का राइडर समुदाय है।',
+      city: 'शहर',
+      cityNote: 'वर्तमान में',
+      cityNoteEnd: 'में ही ऑनबोर्डिंग हो रही है।',
+      age: 'उम्र',
+      agePlaceholder: 'आपकी उम्र (वर्षों में)',
+      ageError: '18 वर्ष या उससे अधिक होना चाहिए',
+      areas: 'कवर किए जाने वाले क्षेत्र',
+      noAreas: 'कोई क्षेत्र कॉन्फ़िगर नहीं है',
+      selectAreas: 'क्षेत्र चुनें',
+      submit: 'क्वीन के रूप में रजिस्टर करें',
+      footer: 'रजिस्टर करके, आप वूश द्वारा राइडिंग के बारे में संपर्क किए जाने के लिए सहमत हैं।',
+      privacy: 'गोपनीयता नीति',
+      successTitle: 'बेसिक रजिस्ट्रेशन पूरा हुआ!',
+      successMsg: 'वूश क्वीन्स के साथ अपनी यात्रा शुरू करने के लिए धन्यवाद।',
+      nextSteps: 'अगले कदम',
+      step1: 'Google Play Store से <strong>Woosh Captain</strong> ऐप डाउनलोड करें।',
+      step2: 'अपने रजिस्टर्ड मोबाइल नंबर से लॉग इन करें',
+      step3: 'वेरिफिकेशन पूरा करने के लिए ऐप में अपने KYC दस्तावेज़ और वाहन विवरण अपलोड करें।',
+      downloadApp: 'ऐप डाउनलोड करें',
+      close: 'बंद करें',
+    }
+  };
+  const tx = t[lang];
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -224,7 +307,7 @@ export const RiderRegistration = ({ isOpen, onClose }) => {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ duration: 0.25 }}
-            className="relative w-full max-w-xl bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]"
+            className="relative w-full max-w-2xl bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Close Button */}
@@ -236,62 +319,69 @@ export const RiderRegistration = ({ isOpen, onClose }) => {
             </button>
 
             {/* Scrollable Content */}
-            <div className="p-6 md:p-8 overflow-y-auto" data-lenis-prevent="true">
+            <div className="p-6 md:p-10 overflow-y-auto" data-lenis-prevent="true">
               {isSuccess ? (
                 <div className="text-center py-6">
                   <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                     <svg className="w-8 h-8 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
                   </div>
-                  <h3 className="text-2xl font-bold text-[#1A1A2E] mb-2">Basic Registration Complete!</h3>
-                  <p className="text-gray-600 mb-6">Thank you for starting your journey with Woosh Queens.</p>
+                  <h3 className="text-2xl font-bold text-[#1A1A2E] mb-2">{tx.successTitle}</h3>
+                  <p className="text-gray-600 text-[1.1rem] mb-6">{tx.successMsg}</p>
                   
                   <div className="bg-pink-50 rounded-xl p-5 text-left mb-6">
-                    <h4 className="font-bold text-[#E91E63] text-sm mb-3">Next Steps</h4>
-                    <ol className="text-sm text-gray-700 space-y-3 list-decimal pl-4">
-                      <li>Download the <strong>Woosh Captain</strong> app from the Google Play Store.</li>
-                      <li>Log in using your registered mobile number (+91 {formData.phone}).</li>
-                      <li>Upload your KYC documents and vehicle details directly in the app to complete verification.</li>
+                    <h4 className="font-bold text-[#E91E63] text-[0.95rem] mb-3">{tx.nextSteps}</h4>
+                    <ol className="text-[0.95rem] text-gray-700 space-y-3 list-decimal pl-4">
+                      <li dangerouslySetInnerHTML={{ __html: tx.step1 }} />
+                      <li>{tx.step2} (+91 {formData.phone}).</li>
+                      <li>{tx.step3}</li>
                     </ol>
                   </div>
 
                   <div className="flex flex-col gap-3">
                     <a href="https://play.google.com/store/apps/details?id=com.woosh.ride" target="_blank" rel="noopener noreferrer" className="bg-[#1A1A2E] text-white py-3.5 rounded-xl font-bold text-[15px] text-center hover:bg-black transition-colors">
-                      Download App
+                      {tx.downloadApp}
                     </a>
                     <button onClick={handleReset} className="text-gray-500 font-medium hover:text-gray-700 transition-colors py-2">
-                      Close
+                      {tx.close}
                     </button>
                   </div>
                 </div>
               ) : (
                 <>
-                  <div className="flex items-center gap-2 mb-4">
+                  <div className="flex items-center justify-between mb-4">
                     <span className="bg-[#FFF0F5] text-[#E91E63] text-xs font-bold uppercase tracking-wider px-3 py-1.5 rounded-full flex items-center gap-1.5">
-                      👑 Queen Registration
+                      {tx.badge}
                     </span>
+                    <button 
+                      type="button" 
+                      onClick={() => setLang(lang === 'en' ? 'hi' : 'en')}
+                      className="text-xs font-bold border border-gray-200 rounded-full px-3 py-1.5 hover:bg-gray-50 transition-colors text-gray-600"
+                    >
+                      {lang === 'en' ? 'हिंदी' : 'English'}
+                    </button>
                   </div>
-                  <h2 className="text-2xl font-extrabold text-[#1A1A2E] mb-1">Become a Woosh Queen</h2>
-                  <p className="text-gray-500 text-[15px] mb-7">Takes under a minute. Our team will call you to complete your registration.</p>
+                  <h2 className="text-2xl md:text-3xl font-extrabold text-[#1A1A2E] mb-1">{tx.title}</h2>
+                  <p className="text-gray-500 text-[1rem] md:text-[1.1rem] mb-7">{tx.subtitle}</p>
 
                   <form onSubmit={handleSubmit} className="space-y-5">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                       {/* Full Name */}
                       <div>
-                        <label className="block text-sm font-semibold text-gray-800 mb-1.5">Full name</label>
+                        <label className="block text-[0.9rem] font-semibold text-gray-800 mb-1.5">{tx.fullName}</label>
                         <input
                           type="text"
                           name="name"
                           value={formData.name}
                           onChange={handleChange}
-                          placeholder="As on your driving licence"
-                          className={`w-full border ${errors.name ? 'border-red-400' : 'border-gray-200'} rounded-xl px-4 py-3 text-[15px] text-gray-800 focus:outline-none focus:border-[#E91E63] focus:ring-1 focus:ring-[#E91E63] transition-all placeholder:text-gray-400`}
+                          placeholder={tx.namePlaceholder}
+                          className={`w-full border ${errors.name ? 'border-red-400' : 'border-gray-200'} rounded-xl px-4 py-3.5 text-[1rem] text-gray-800 focus:outline-none focus:border-[#E91E63] focus:ring-1 focus:ring-[#E91E63] transition-all placeholder:text-gray-400`}
                         />
-                        {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
+                        {errors.name && <p className="text-red-500 text-xs mt-1">{tx.nameRequired}</p>}
                       </div>
 
                       {/* Phone Number */}
                       <div>
-                        <label className="block text-sm font-semibold text-gray-800 mb-1.5">Phone number</label>
+                        <label className="block text-[0.9rem] font-semibold text-gray-800 mb-1.5">{tx.phone}</label>
                         <div className="flex shadow-sm rounded-xl">
                           <span className="inline-flex items-center px-3 sm:px-4 rounded-l-xl border border-r-0 border-gray-200 bg-gray-50 text-gray-500 text-sm font-semibold">
                             +91
@@ -307,8 +397,8 @@ export const RiderRegistration = ({ isOpen, onClose }) => {
                               handleChange({ target: { name: 'phone', value: val } });
                               if (isOtpSent) setIsOtpSent(false);
                             }}
-                            placeholder="10-digit mobile number"
-                            className={`flex-1 min-w-0 border ${errors.phone ? 'border-red-400' : 'border-gray-200'} ${isPhoneVerified ? 'bg-gray-50' : 'border-r-0'} px-3 sm:px-4 py-3 text-[15px] text-gray-800 focus:outline-none focus:border-[#E91E63] focus:ring-1 focus:ring-[#E91E63] transition-all placeholder:text-gray-400`}
+                            placeholder={tx.phonePlaceholder}
+                            className={`flex-1 min-w-0 border ${errors.phone ? 'border-red-400' : 'border-gray-200'} ${isPhoneVerified ? 'bg-gray-50' : 'border-r-0'} px-3 sm:px-4 py-3.5 text-[1rem] text-gray-800 focus:outline-none focus:border-[#E91E63] focus:ring-1 focus:ring-[#E91E63] transition-all placeholder:text-gray-400`}
                           />
                           {isPhoneVerified ? (
                             <div className="flex items-center justify-center px-4 border border-l-0 border-gray-200 rounded-r-xl bg-green-50 text-green-600">
@@ -321,7 +411,7 @@ export const RiderRegistration = ({ isOpen, onClose }) => {
                               disabled={otpLoading || !formData.phone || formData.phone.length < 10}
                               className="px-4 bg-[#E91E63] hover:bg-[#D81B60] text-white font-semibold text-[13px] rounded-r-xl transition-colors whitespace-nowrap disabled:opacity-60"
                             >
-                              {otpLoading && !isOtpSent ? '...' : isOtpSent ? 'Resend' : 'Send OTP'}
+                              {otpLoading && !isOtpSent ? '...' : isOtpSent ? tx.resend : tx.sendOtp}
                             </button>
                           )}
                         </div>
@@ -345,7 +435,7 @@ export const RiderRegistration = ({ isOpen, onClose }) => {
                                     setOtp(e.target.value.replace(/\D/g, ''));
                                     setOtpError('');
                                   }}
-                                  placeholder="Enter 6-digit code"
+                                  placeholder={tx.otpPlaceholder}
                                   className={`flex-1 w-full border ${otpError ? 'border-red-400' : 'border-gray-200'} border-r-0 rounded-l-xl px-4 py-2.5 text-sm tracking-widest font-semibold text-gray-800 focus:outline-none focus:border-[#E91E63] focus:ring-1 focus:ring-[#E91E63] transition-all`}
                                 />
                                 <button
@@ -354,7 +444,7 @@ export const RiderRegistration = ({ isOpen, onClose }) => {
                                 disabled={otpLoading || !otp || otp.length < 4}
                                 className="px-6 bg-[#1A1A2E] hover:bg-black text-white font-semibold text-sm rounded-r-xl transition-colors whitespace-nowrap disabled:opacity-60"
                               >
-                                {otpLoading ? '...' : 'Verify'}
+                                {otpLoading ? '...' : tx.verify}
                               </button>
                             </div>
                             {otpError && <p className="text-red-500 text-xs mt-1">{otpError}</p>}
@@ -367,28 +457,28 @@ export const RiderRegistration = ({ isOpen, onClose }) => {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                       {/* Gender */}
                       <div>
-                        <label className="block text-sm font-semibold text-gray-800 mb-1.5">Gender</label>
+                        <label className="block text-[0.9rem] font-semibold text-gray-800 mb-1.5">{tx.gender}</label>
                         <div className="relative">
                           <input
                             type="text"
-                            value="Female"
+                            value={tx.female}
                             disabled
-                            className="w-full border border-gray-200 rounded-xl px-4 py-3 text-[15px] text-gray-800 bg-gray-50 cursor-not-allowed"
+                            className="w-full border border-gray-200 rounded-xl px-4 py-3.5 text-[1rem] text-gray-800 bg-gray-50 cursor-not-allowed"
                           />
                           <svg className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15V3m0 12l-4-4m4 4l4-4M2 17l.621 2.485A2 2 0 004.561 21h14.878a2 2 0 001.94-1.515L22 17" /></svg>
                         </div>
-                        <p className="text-xs text-gray-400 mt-1">Woosh Queens is a women-only rider community.</p>
+                        <p className="text-xs text-gray-400 mt-1">{tx.genderNote}</p>
                       </div>
 
                       {/* City */}
                       <div>
-                        <label className="block text-sm font-semibold text-gray-800 mb-1.5">City</label>
+                        <label className="block text-[0.9rem] font-semibold text-gray-800 mb-1.5">{tx.city}</label>
                         <div className="relative">
                           <select
                             name="city"
                             value={formData.city}
                             onChange={handleChange}
-                            className="w-full border border-gray-200 rounded-xl px-4 py-3 text-[15px] text-gray-800 focus:outline-none focus:border-[#E91E63] focus:ring-1 focus:ring-[#E91E63] transition-all bg-white appearance-none"
+                            className="w-full border border-gray-200 rounded-xl px-4 py-3.5 text-[1rem] text-gray-800 focus:outline-none focus:border-[#E91E63] focus:ring-1 focus:ring-[#E91E63] transition-all bg-white appearance-none"
                           >
                             {cities.map((city) => (
                               <option key={city._id || city.name} value={city.name}>
@@ -398,14 +488,14 @@ export const RiderRegistration = ({ isOpen, onClose }) => {
                           </select>
                           <svg className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
                         </div>
-                        <p className="text-xs text-gray-400 mt-1">Currently onboarding in {formData.city || 'selected cities'} only.</p>
+                        <p className="text-xs text-gray-400 mt-1">{tx.cityNote} {formData.city || 'selected cities'} {tx.cityNoteEnd}</p>
                       </div>
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                       {/* Age */}
                       <div>
-                        <label className="block text-sm font-semibold text-gray-800 mb-1.5">Age</label>
+                        <label className="block text-[0.9rem] font-semibold text-gray-800 mb-1.5">{tx.age}</label>
                         <input
                           type="text"
                           name="age"
@@ -415,27 +505,27 @@ export const RiderRegistration = ({ isOpen, onClose }) => {
                             handleChange({ target: { name: 'age', value: val } });
                           }}
                           maxLength="2"
-                          placeholder="Your age in years"
-                          className={`w-full border ${errors.age ? 'border-red-400' : 'border-gray-200'} rounded-xl px-4 py-3 text-[15px] text-gray-800 focus:outline-none focus:border-[#E91E63] focus:ring-1 focus:ring-[#E91E63] transition-all placeholder:text-gray-400`}
+                          placeholder={tx.agePlaceholder}
+                          className={`w-full border ${errors.age ? 'border-red-400' : 'border-gray-200'} rounded-xl px-4 py-3.5 text-[1rem] text-gray-800 focus:outline-none focus:border-[#E91E63] focus:ring-1 focus:ring-[#E91E63] transition-all placeholder:text-gray-400`}
                         />
-                        {errors.age && <p className="text-red-500 text-xs mt-1">{errors.age}</p>}
+                        {errors.age && <p className="text-red-500 text-xs mt-1">{tx.ageError}</p>}
                       </div>
 
                       {/* Areas */}
                       <div>
-                        <label className="block text-sm font-semibold text-gray-800 mb-1.5">Covered Areas</label>
+                        <label className="block text-[0.9rem] font-semibold text-gray-800 mb-1.5">{tx.areas}</label>
                         
                         <div className="relative">
                           <div
-                            className={`w-full border ${availableAreas.length === 0 ? 'bg-gray-50 text-gray-400 cursor-not-allowed border-gray-200' : 'bg-white cursor-pointer hover:border-[#E91E63] border-gray-200'} rounded-xl px-4 py-3 text-[15px] flex justify-between items-center transition-all`}
+                            className={`w-full border ${availableAreas.length === 0 ? 'bg-gray-50 text-gray-400 cursor-not-allowed border-gray-200' : 'bg-white cursor-pointer hover:border-[#E91E63] border-gray-200'} rounded-xl px-4 py-3.5 text-[1rem] flex justify-between items-center transition-all`}
                             onClick={() => availableAreas.length > 0 && setIsAreaDropdownOpen(!isAreaDropdownOpen)}
                           >
                             <span className={`truncate pr-2 ${availableAreas.length === 0 ? 'text-gray-400' : 'text-gray-700 font-medium'}`}>
                               {availableAreas.length === 0 
-                                ? 'No areas configured' 
+                                ? tx.noAreas 
                                 : formData.areas.length > 0 
                                   ? formData.areas.join(', ') 
-                                  : 'Select areas'}
+                                  : tx.selectAreas}
                             </span>
                             <ChevronDown size={18} className="text-gray-400 flex-shrink-0" />
                           </div>
@@ -476,20 +566,20 @@ export const RiderRegistration = ({ isOpen, onClose }) => {
                     <button
                       type="submit"
                       disabled={loading || !isPhoneVerified}
-                      className="w-full bg-[#E91E63] hover:bg-[#D81B60] text-white py-3.5 rounded-xl font-bold text-[15px] disabled:opacity-60 transition-all shadow-md hover:shadow-lg flex items-center justify-center"
+                      className="w-full bg-[#E91E63] hover:bg-[#D81B60] text-white py-4 rounded-xl font-bold text-[1rem] disabled:opacity-60 transition-all shadow-md hover:shadow-lg flex items-center justify-center"
                     >
                       {loading ? (
                         <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                       ) : (
-                        'Register as a Queen'
+                        tx.submit
                       )}
                     </button>
                   </form>
 
                   {/* Footer text */}
                   <p className="text-center text-xs text-gray-400 mt-5 leading-relaxed">
-                    By registering, you agree to be contacted by Woosh about riding.{" "}
-                    See our <Link to="/privacy" className="text-[#E91E63] font-medium hover:underline" onClick={handleReset}>Privacy Policy</Link>.
+                    {tx.footer}{" "}
+                    See our <Link to="/privacy" className="text-[#E91E63] font-medium hover:underline" onClick={handleReset}>{tx.privacy}</Link>.
                   </p>
                 </>
               )}

@@ -20,6 +20,11 @@ export const HeroSection = () => {
   return (
     <>
       <section className="relative min-h-[100svh] pt-28 md:pt-36 pb-16 overflow-hidden bg-[#13111C] flex items-center">
+        {/* Top Left Logo */}
+        <div className="absolute top-6 left-6 md:top-8 md:left-24 z-[100]">
+          <img src="/logo.png" alt="Woosh" className="h-10 md:h-[50px] w-auto object-contain bg-white rounded-xl p-2" />
+        </div>
+
         {/* Background Map Grid (Dark Theme) */}
         <div 
           className="absolute inset-0 z-0 opacity-[0.03]"
@@ -163,10 +168,15 @@ export const HeroSection = () => {
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 1 }}
-                  className="absolute top-4 sm:top-8 left-4 sm:left-6 bg-white p-2.5 sm:p-3 pr-4 sm:pr-5 rounded-2xl shadow-xl flex items-center gap-3 border border-gray-100 scale-90 sm:scale-100 origin-top-left "
+                  className="absolute top-4 sm:top-8 left-4 sm:left-6 bg-[#0B090F]/90 backdrop-blur-md p-2.5 sm:p-3 pr-4 sm:pr-6 rounded-2xl shadow-2xl flex items-center gap-3 sm:gap-4 border border-white/10 scale-90 sm:scale-100 origin-top-left"
                 >
-                  <img src="/logo.png" height={"100px"} width={"100px"} alt="" />
-                
+                 <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-[#E91E63] to-[#9C27B0] rounded-full flex items-center justify-center text-white font-bold text-sm sm:text-base shadow-inner">
+                  MK
+                 </div>
+                 <div className="flex flex-col">
+                  <span className="text-sm sm:text-[15px] font-bold text-white tracking-wide">Muskan Khan</span>
+                  <span className="text-[10px] sm:text-xs font-medium text-gray-400">Queen #4928</span>
+                 </div>
                 </motion.div>
 
                 {/* OTP Box (Middle Right) */}
@@ -219,21 +229,21 @@ export const HeroSection = () => {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 50 }}
-            className="fixed bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-[90] w-[95%] sm:w-[90%] max-w-xl bg-[#1A1A2E]/90 backdrop-blur-md border border-white/10 p-3 sm:p-4 rounded-3xl shadow-2xl flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4"
+            className="fixed bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-[90] w-[95%] sm:w-[90%] max-w-2xl bg-[#1A1A2E]/90 backdrop-blur-md border border-white/10 p-3.5 sm:p-5 rounded-3xl shadow-2xl flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-5"
           >
-            <span className="text-white/80 text-md font-semibold whitespace-nowrap hidden sm:block">Ready to woosh?</span>
-            <div className="flex items-center gap-2 sm:gap-3 w-full sm:w-auto justify-center">
+            <span className="text-white/80 text-base sm:text-lg font-semibold whitespace-nowrap hidden sm:block">Ready to woosh?</span>
+            <div className="flex items-center gap-2.5 sm:gap-3.5 w-full sm:w-auto justify-center">
               <button 
                 onClick={() => window.location.href = "https://play.google.com/store/apps/details?id=com.woosh.in"}
-                className="flex-1 sm:flex-none bg-[#E91E63] hover:bg-[#D81B60] text-white px-3 sm:px-5 py-2.5 rounded-full font-bold text-md sm:text-sm transition-colors shadow-md text-center whitespace-nowrap"
+                className="flex-1 sm:flex-none bg-[#E91E63] hover:bg-[#D81B60] text-white px-5 sm:px-8 py-3 sm:py-3.5 rounded-full font-bold text-[15px] sm:text-base transition-colors shadow-md text-center whitespace-nowrap"
               >
                 Book a ride
               </button>
               <button 
                 onClick={() => document.dispatchEvent(new CustomEvent('openRiderModal'))}
-                className="flex-1 sm:flex-none bg-white hover:bg-gray-100 text-[#1A1A2E] px-3 sm:px-5 py-2.5 rounded-full font-bold text-md sm:text-sm transition-colors shadow-md text-center flex items-center justify-center gap-1.5 whitespace-nowrap"
+                className="flex-1 sm:flex-none bg-white hover:bg-gray-100 text-[#1A1A2E] px-5 sm:px-8 py-3 sm:py-3.5 rounded-full font-bold text-[15px] sm:text-base transition-colors shadow-md text-center flex items-center justify-center gap-2 whitespace-nowrap"
               >
-                <span className="text-sm sm:text-base leading-none">👑</span>
+                <span className="text-lg sm:text-xl leading-none">👑</span>
                 Become a Queen
               </button>
             </div>

@@ -27,9 +27,9 @@ export const TermsOfService = () => {
       
       <div className="
         [&_h2]:text-[1.75rem] [&_h2]:font-bold [&_h2]:text-[#1c1c1c] [&_h2]:tracking-tight [&_h2]:mt-14 [&_h2]:mb-6 [&_h2]:pb-4 [&_h2]:border-b [&_h2]:border-gray-100
-        [&_h3]:text-[1.25rem] [&_h3]:font-bold [&_h3]:text-[#1c1c1c] [&_h3]:mt-8 [&_h3]:mb-4
-        [&_p]:text-gray-600 [&_p]:text-[15px] [&_p]:leading-[1.8] [&_p]:mb-6
-        [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:mb-6 [&_li]:text-gray-600 [&_li]:text-[15px] [&_li]:leading-[1.8] [&_li]:mb-2
+        [&_h3]:text-[1.35rem] [&_h3]:font-bold [&_h3]:text-[#1c1c1c] [&_h3]:mt-8 [&_h3]:mb-4
+        [&_p]:text-gray-600 [&_p]:text-[1.1rem] [&_p]:leading-[1.8] [&_p]:mb-6
+        [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:mb-6 [&_li]:text-gray-600 [&_li]:text-[1.1rem] [&_li]:leading-[1.8] [&_li]:mb-2
         [&_a]:text-[#EF4F5F] [&_a]:underline
       ">
 

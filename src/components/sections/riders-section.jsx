@@ -8,8 +8,8 @@ const BenefitCard = ({ icon, title, description }) => (
       {icon}
     </div>
     <div>
-      <h4 className="text-[#1A1A2E] font-bold text-md mb-1">{title}</h4>
-      <p className="text-gray-500 text-md leading-relaxed">{description}</p>
+      <h4 className="text-[#1A1A2E] font-bold text-[1.3rem] mb-1">{title}</h4>
+      <p className="text-gray-500 text-[1.1rem] leading-relaxed">{description}</p>
     </div>
   </div>
 );
@@ -191,7 +191,7 @@ export const RidersSection = () => {
             to={"https://play.google.com/store/apps/details?id=com.woosh.in"}
               className="bg-white hover:bg-gray-100 text-[#1A1A2E] px-8 py-3.5 rounded-full font-bold transition-colors"
             >
-            Request a Ride
+           Try Woosh Ride
             </Link>
           </div>
         </div>

@@ -50,8 +50,8 @@ export const SafetyFeatures = () => {
                 <div key={i} className="flex gap-3">
                   <svg className="w-5 h-5 text-[#E91E63] shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" /></svg>
                   <div>
-                    <h4 className="font-bold text-[#1A1A2E] text-md mb-1">{item.title}</h4>
-                    <p className="text-gray-500 text-md leading-relaxed">{item.desc}</p>
+                    <h4 className="font-bold text-[#1A1A2E] text-[1.3rem] mb-1">{item.title}</h4>
+                    <p className="text-gray-500 text-[1.1rem] leading-relaxed">{item.desc}</p>
                   </div>
                 </div>
               ))}
@@ -86,8 +86,8 @@ export const SafetyFeatures = () => {
                 <div key={i} className="flex gap-3">
                   <svg className="w-5 h-5 text-[#E91E63] shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" /></svg>
                   <div>
-                    <h4 className="font-bold text-[#1A1A2E] text-[15px] mb-1">{item.title}</h4>
-                    <p className="text-gray-500 text-md leading-relaxed">{item.desc}</p>
+                    <h4 className="font-bold text-[#1A1A2E] text-[1.3rem] mb-1">{item.title}</h4>
+                    <p className="text-gray-500 text-[1.1rem] leading-relaxed">{item.desc}</p>
                   </div>
                 </div>
               ))}
@@ -122,8 +122,8 @@ export const SafetyFeatures = () => {
                 <div key={i} className="flex gap-3">
                   <svg className="w-5 h-5 text-[#E91E63] shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" /></svg>
                   <div>
-                    <h4 className="font-bold text-[#1A1A2E] text-[15px] mb-1">{item.title}</h4>
-                    <p className="text-gray-500 text-md leading-relaxed">{item.desc}</p>
+                    <h4 className="font-bold text-[#1A1A2E] text-[1.3rem] mb-1">{item.title}</h4>
+                    <p className="text-gray-500 text-[1.1rem] leading-relaxed">{item.desc}</p>
                   </div>
                 </div>
               ))}
@@ -160,7 +160,7 @@ export const SafetyFeatures = () => {
                 <div className={`w-12 h-12 rounded-full ${step.bg} flex items-center justify-center text-white font-bold text-sm shrink-0`}>
                   {step.num}
                 </div>
-                <p className="text-white text-[15px] font-medium leading-snug">
+                <p className="text-white text-[1.1rem] font-medium leading-snug">
                   {step.text}
                 </p>
               </div>

@@ -43,7 +43,7 @@ export const FareBooking = () => {
                   </div>
                   <div>
                     <h3 className="text-lg font-bold text-[#1A1A2E] mb-1">{step.title}</h3>
-                    <p className="text-gray-500 text-md">{step.desc}</p>
+                    <p className="text-gray-500 text-[1.1rem] leading-relaxed">{step.desc}</p>
                   </div>
                 </motion.div>
               ))}
@@ -63,7 +63,7 @@ export const FareBooking = () => {
               <div className="flex justify-between items-center mb-8">
                 <div>
                   <h3 className="text-[13px] font-bold text-gray-500 tracking-wider uppercase mb-1">Fare Breakdown</h3>
-                  <p className="text-sm text-gray-400">Example trip · 8 km · 25 min</p>
+                  <p className="text-md text-gray-400">Example trip · 8 km · 25 min</p>
                 </div>
                 <div className="bg-green-50 text-green-600 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
                   Upfront
@@ -137,7 +137,7 @@ export const FareBooking = () => {
                 <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">{item.icon}</svg>
               </div>
               <h4 className="font-bold text-[#1A1A2E] text-lg mb-2">{item.title}</h4>
-              <p className="text-gray-500 text-[16px] leading-relaxed">{item.desc}</p>
+              <p className="text-gray-500 text-[1.1rem] leading-relaxed">{item.desc}</p>
             </motion.div>
           ))}
         </div>

@@ -68,7 +68,7 @@ export const FaqSection = () => {
                     exit={{ height: 0, opacity: 0 }}
                     transition={{ duration: 0.2, ease: "easeInOut" }}
                   >
-                    <div className="px-6 pb-6 pt-2 text-gray-500 text-[16px] leading-relaxed">
+                    <div className="px-6 pb-6 pt-2 text-gray-500 text-[1.1rem] leading-relaxed">
                       {faq.answer}
                     </div>
                   </motion.div>

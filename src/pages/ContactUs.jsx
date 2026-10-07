@@ -20,6 +20,7 @@ const QUERY_TYPES = [
 export const ContactUs = ({ isOpen, onClose }) => {
   const [loading, setLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [lang, setLang] = useState('en');
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -27,6 +28,56 @@ export const ContactUs = ({ isOpen, onClose }) => {
     message: ''
   });
   const [errors, setErrors] = useState({});
+
+  const t = {
+    en: {
+      badge: 'CONTACT US',
+      title: 'Contact Team Woosh',
+      subtitle: 'Questions, feedback or a problem with a ride? Tell us and we\'ll get back to you.',
+      fullName: 'Full name',
+      namePlaceholder: 'Your name',
+      nameRequired: 'Name is required',
+      phone: 'Phone number',
+      phonePlaceholder: '10-digit mobile number',
+      phoneRequired: 'Valid 10-digit number required',
+      queryType: 'Query type',
+      queryPlaceholder: 'Select a query type',
+      queryRequired: 'Please select a query type',
+      message: 'Your message',
+      messagePlaceholder: 'Tell us how we can help.',
+      messageRequired: 'Please describe your concern',
+      submit: 'Send message',
+      footer: 'We\'ll only use these details to respond to you. See our',
+      privacy: 'Privacy Policy',
+      successTitle: 'Message Sent!',
+      successMsg: 'Our team will get back to you shortly. Thank you for reaching out.',
+      close: 'Close',
+    },
+    hi: {
+      badge: 'संपर्क करें',
+      title: 'टीम वूश से संपर्क करें',
+      subtitle: 'सवाल, फीडबैक या राइड में कोई समस्या? हमें बताएं, हम जल्द जवाब देंगे।',
+      fullName: 'पूरा नाम',
+      namePlaceholder: 'आपका नाम',
+      nameRequired: 'नाम आवश्यक है',
+      phone: 'फ़ोन नंबर',
+      phonePlaceholder: '10 अंकों का मोबाइल नंबर',
+      phoneRequired: 'सही 10 अंकों का नंबर डालें',
+      queryType: 'समस्या का प्रकार',
+      queryPlaceholder: 'समस्या का प्रकार चुनें',
+      queryRequired: 'कृपया समस्या का प्रकार चुनें',
+      message: 'आपका संदेश',
+      messagePlaceholder: 'हमें बताएं हम कैसे मदद कर सकते हैं।',
+      messageRequired: 'कृपया अपनी समस्या विस्तार से बताएं',
+      submit: 'संदेश भेजें',
+      footer: 'हम इन जानकारियों का उपयोग केवल आपको जवाब देने के लिए करेंगे। देखें हमारी',
+      privacy: 'गोपनीयता नीति',
+      successTitle: 'संदेश भेजा गया!',
+      successMsg: 'हमारी टीम जल्द ही आपसे संपर्क करेगी। धन्यवाद।',
+      close: 'बंद करें',
+    }
+  };
+  const tx = t[lang];
 
   if (!isOpen) return null;
 
@@ -94,10 +145,10 @@ export const ContactUs = ({ isOpen, onClose }) => {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ duration: 0.25 }}
-            className="relative w-full max-w-md bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[95vh] border border-gray-100"
+            className="relative w-full max-w-2xl bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[95vh] border border-gray-100"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Right side pink border accent like in the screenshot */}
+            {/* Right side pink border accent */}
             <div className="absolute right-0 top-1/4 bottom-1/4 w-1 bg-[#E91E63] rounded-l-md" />
 
             {/* Close Button */}
@@ -109,82 +160,90 @@ export const ContactUs = ({ isOpen, onClose }) => {
             </button>
 
             {/* Scrollable Content */}
-            <div className="p-6 md:p-8 overflow-y-auto" data-lenis-prevent="true">
+            <div className="p-6 md:p-10 overflow-y-auto" data-lenis-prevent="true">
               {isSuccess ? (
                 <div className="text-center py-6">
                   <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                     <svg className="w-8 h-8 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
                   </div>
-                  <h3 className="text-2xl font-bold text-[#1A1A2E] mb-2">Message Sent!</h3>
-                  <p className="text-gray-600 mb-6">Our team will get back to you shortly. Thank you for reaching out.</p>
-                  <button onClick={handleReset} className="w-full bg-[#E91E63] text-white py-3.5 rounded-xl font-bold text-[15px] hover:bg-[#D81B60] transition-colors shadow-md">
-                    Close
+                  <h3 className="text-2xl font-bold text-[#1A1A2E] mb-2">{tx.successTitle}</h3>
+                  <p className="text-gray-600 text-[1.1rem] mb-6">{tx.successMsg}</p>
+                  <button onClick={handleReset} className="w-full bg-[#E91E63] text-white py-3.5 rounded-xl font-bold text-[1rem] hover:bg-[#D81B60] transition-colors shadow-md">
+                    {tx.close}
                   </button>
                 </div>
               ) : (
                 <>
-                  {/* Header Badge */}
-                  <div className="flex items-center gap-2 mb-4">
+                  {/* Header */}
+                  <div className="flex items-center justify-between mb-4">
                     <span className="text-[#E91E63] text-xs font-bold uppercase tracking-wider flex items-center gap-1.5">
                       <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" /></svg>
-                      CONTACT US
+                      {tx.badge}
                     </span>
+                    <button 
+                      type="button" 
+                      onClick={() => setLang(lang === 'en' ? 'hi' : 'en')}
+                      className="text-xs font-bold border border-gray-200 rounded-full px-3 py-1.5 hover:bg-gray-50 transition-colors text-gray-600"
+                    >
+                      {lang === 'en' ? 'हिंदी' : 'English'}
+                    </button>
                   </div>
 
-                  <h2 className="text-2xl font-extrabold text-[#1A1A2E] mb-2">Contact Team Woosh</h2>
-                  <p className="text-gray-500 text-[15px] mb-6 leading-relaxed">Questions, feedback or a problem with a ride? Tell us and we'll get back to you.</p>
-
-               
+                  <h2 className="text-2xl md:text-3xl font-extrabold text-[#1A1A2E] mb-2">{tx.title}</h2>
+                  <p className="text-gray-500 text-[1rem] md:text-[1.1rem] mb-7 leading-relaxed">{tx.subtitle}</p>
 
                   <form onSubmit={handleSubmit} className="space-y-5">
-                    {/* Full Name */}
-                    <div>
-                      <label className="block text-sm font-semibold text-gray-800 mb-1.5">Full name</label>
-                      <input
-                        type="text"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        placeholder="Your name"
-                        className={`w-full border ${errors.name ? 'border-red-400' : 'border-gray-200'} rounded-xl px-4 py-3 text-[15px] text-gray-800 focus:outline-none focus:border-[#E91E63] focus:ring-1 focus:ring-[#E91E63] transition-all placeholder:text-gray-400 bg-white`}
-                      />
-                      {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
-                    </div>
-
-                    {/* Phone Number */}
-                    <div>
-                      <label className="block text-sm font-semibold text-gray-800 mb-1.5">Phone number</label>
-                      <div className="flex">
-                        <span className="inline-flex items-center px-4 rounded-l-xl border border-r-0 border-gray-200 bg-gray-50 text-gray-500 text-sm font-semibold">
-                          +91
-                        </span>
+                    {/* Row 1: Name + Phone */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                      {/* Full Name */}
+                      <div>
+                        <label className="block text-[0.9rem] font-semibold text-gray-800 mb-1.5">{tx.fullName}</label>
                         <input
                           type="text"
-                          name="phone"
-                          maxLength="10"
-                          value={formData.phone}
-                          onChange={(e) => {
-                            const val = e.target.value.replace(/\D/g, '');
-                            handleChange({ target: { name: 'phone', value: val } });
-                          }}
-                          placeholder="10-digit mobile number"
-                          className={`flex-1 min-w-0 border ${errors.phone ? 'border-red-400' : 'border-gray-200'} rounded-r-xl px-4 py-3 text-[15px] text-gray-800 focus:outline-none focus:border-[#E91E63] focus:ring-1 focus:ring-[#E91E63] transition-all placeholder:text-gray-400 bg-white`}
+                          name="name"
+                          value={formData.name}
+                          onChange={handleChange}
+                          placeholder={tx.namePlaceholder}
+                          className={`w-full border ${errors.name ? 'border-red-400' : 'border-gray-200'} rounded-xl px-4 py-3.5 text-[1rem] text-gray-800 focus:outline-none focus:border-[#E91E63] focus:ring-1 focus:ring-[#E91E63] transition-all placeholder:text-gray-400 bg-white`}
                         />
+                        {errors.name && <p className="text-red-500 text-xs mt-1">{tx.nameRequired}</p>}
                       </div>
-                      {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
+
+                      {/* Phone Number */}
+                      <div>
+                        <label className="block text-[0.9rem] font-semibold text-gray-800 mb-1.5">{tx.phone}</label>
+                        <div className="flex">
+                          <span className="inline-flex items-center px-4 rounded-l-xl border border-r-0 border-gray-200 bg-gray-50 text-gray-500 text-[0.9rem] font-semibold">
+                            +91
+                          </span>
+                          <input
+                            type="text"
+                            name="phone"
+                            maxLength="10"
+                            value={formData.phone}
+                            onChange={(e) => {
+                              const val = e.target.value.replace(/\D/g, '');
+                              handleChange({ target: { name: 'phone', value: val } });
+                            }}
+                            placeholder={tx.phonePlaceholder}
+                            className={`flex-1 min-w-0 border ${errors.phone ? 'border-red-400' : 'border-gray-200'} rounded-r-xl px-4 py-3.5 text-[1rem] text-gray-800 focus:outline-none focus:border-[#E91E63] focus:ring-1 focus:ring-[#E91E63] transition-all placeholder:text-gray-400 bg-white`}
+                          />
+                        </div>
+                        {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
+                      </div>
                     </div>
 
-                    {/* Query Type */}
+                    {/* Query Type - full width */}
                     <div>
-                      <label className="block text-sm font-semibold text-gray-800 mb-1.5">Query type</label>
+                      <label className="block text-[0.9rem] font-semibold text-gray-800 mb-1.5">{tx.queryType}</label>
                       <div className="relative">
                         <select
                           name="queryType"
                           value={formData.queryType}
                           onChange={handleChange}
-                          className={`w-full border ${errors.queryType ? 'border-red-400' : 'border-gray-200'} rounded-xl px-4 py-3 text-[15px] text-gray-800 focus:outline-none focus:border-[#E91E63] focus:ring-1 focus:ring-[#E91E63] transition-all bg-white appearance-none ${!formData.queryType ? 'text-gray-400' : ''}`}
+                          className={`w-full border ${errors.queryType ? 'border-red-400' : 'border-gray-200'} rounded-xl px-4 py-3.5 text-[1rem] text-gray-800 focus:outline-none focus:border-[#E91E63] focus:ring-1 focus:ring-[#E91E63] transition-all bg-white appearance-none ${!formData.queryType ? 'text-gray-400' : ''}`}
                         >
-                          <option value="" disabled hidden>Select a query type</option>
+                          <option value="" disabled hidden>{tx.queryPlaceholder}</option>
                           {QUERY_TYPES.map(type => (
                             <option key={type} value={type} className="text-gray-800">{type}</option>
                           ))}
@@ -197,7 +256,7 @@ export const ContactUs = ({ isOpen, onClose }) => {
                     {/* Message */}
                     <div>
                       <div className="flex justify-between items-end mb-1.5">
-                        <label className="block text-sm font-semibold text-gray-800">Your message</label>
+                        <label className="block text-[0.9rem] font-semibold text-gray-800">{tx.message}</label>
                         <span className="text-[11px] font-medium text-gray-400">{formData.message.length}/500</span>
                       </div>
                       <textarea
@@ -206,8 +265,8 @@ export const ContactUs = ({ isOpen, onClose }) => {
                         onChange={handleChange}
                         maxLength={500}
                         rows={4}
-                        placeholder="Tell us how we can help."
-                        className={`w-full border ${errors.message ? 'border-red-400' : 'border-gray-200'} rounded-xl px-4 py-3 text-[15px] text-gray-800 focus:outline-none focus:border-[#E91E63] focus:ring-1 focus:ring-[#E91E63] transition-all placeholder:text-gray-400 resize-none bg-white`}
+                        placeholder={tx.messagePlaceholder}
+                        className={`w-full border ${errors.message ? 'border-red-400' : 'border-gray-200'} rounded-xl px-4 py-3.5 text-[1rem] text-gray-800 focus:outline-none focus:border-[#E91E63] focus:ring-1 focus:ring-[#E91E63] transition-all placeholder:text-gray-400 resize-none bg-white`}
                       />
                       {errors.message && <p className="text-red-500 text-xs mt-1">{errors.message}</p>}
                     </div>
@@ -215,19 +274,19 @@ export const ContactUs = ({ isOpen, onClose }) => {
                     <button
                       type="submit"
                       disabled={loading}
-                      className="w-full bg-[#E91E63] hover:bg-[#D81B60] text-white py-3.5 rounded-xl font-bold text-[15px] disabled:opacity-60 transition-all shadow-[0_4px_14px_0_rgba(233,30,99,0.39)] flex items-center justify-center mt-2"
+                      className="w-full bg-[#E91E63] hover:bg-[#D81B60] text-white py-4 rounded-xl font-bold text-[1rem] disabled:opacity-60 transition-all shadow-[0_4px_14px_0_rgba(233,30,99,0.39)] flex items-center justify-center mt-2"
                     >
                       {loading ? (
                         <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                       ) : (
-                        'Send message'
+                        tx.submit
                       )}
                     </button>
                   </form>
 
                   {/* Footer text */}
                   <p className="text-center text-xs text-gray-400 mt-5 leading-relaxed font-medium">
-                    We'll only use these details to respond to you. See our <Link to="/privacy" className="text-[#E91E63] hover:underline" onClick={handleReset}>Privacy Policy</Link>
+                    {tx.footer} <Link to="/privacy" className="text-[#E91E63] hover:underline" onClick={handleReset}>{tx.privacy}</Link>
                   </p>
                 </>
               )}
