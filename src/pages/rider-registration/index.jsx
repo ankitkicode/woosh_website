@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, CheckCircle2 } from 'lucide-react';
+import { X, CheckCircle2, ChevronDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export const RiderRegistration = ({ isOpen, onClose }) => {
@@ -22,10 +22,11 @@ export const RiderRegistration = ({ isOpen, onClose }) => {
     phone: '',
     gender: 'female',
     city: 'Bhopal',
-    areas: '',
+    areas: [],
     age: ''
   });
   const [errors, setErrors] = useState({});
+  const [isAreaDropdownOpen, setIsAreaDropdownOpen] = useState(false);
 
   useEffect(() => {
     if (isOpen) {
@@ -55,7 +56,7 @@ export const RiderRegistration = ({ isOpen, onClose }) => {
     setOtp('');
     setOtpError('');
     setToken('');
-    setFormData({ name: '', phone: '', gender: 'female', city: cities[0]?.name || 'Bhopal', areas: '', age: '' });
+    setFormData({ name: '', phone: '', gender: 'female', city: cities[0]?.name || 'Bhopal', areas: [], age: '' });
     setErrors({});
     if (onClose) onClose();
   };
@@ -191,6 +192,20 @@ export const RiderRegistration = ({ isOpen, onClose }) => {
     setFormData(prev => ({ ...prev, [name]: value }));
     if (errors[name]) setErrors(prev => ({ ...prev, [name]: '' }));
   };
+  
+  const handleAreaToggle = (area) => {
+    setFormData(prev => {
+      const isSelected = prev.areas.includes(area);
+      if (isSelected) {
+        return { ...prev, areas: prev.areas.filter(a => a !== area) };
+      } else {
+        return { ...prev, areas: [...prev.areas, area] };
+      }
+    });
+  };
+
+  const selectedCityData = cities.find(c => c.name === formData.city);
+  const availableAreas = selectedCityData?.areas || [];
 
   return (
     <AnimatePresence>
@@ -207,7 +222,7 @@ export const RiderRegistration = ({ isOpen, onClose }) => {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ duration: 0.25 }}
-            className="relative w-full max-w-md bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]"
+            className="relative w-full max-w-xl bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Close Button */}
@@ -257,83 +272,83 @@ export const RiderRegistration = ({ isOpen, onClose }) => {
                   <p className="text-gray-500 text-[15px] mb-7">Takes under a minute. Our team will call you to complete your registration.</p>
 
                   <form onSubmit={handleSubmit} className="space-y-5">
-                    {/* Full Name */}
-                    <div>
-                      <label className="block text-sm font-semibold text-gray-800 mb-1.5">Full name</label>
-                      <input
-                        type="text"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        placeholder="As on your driving licence"
-                        className={`w-full border ${errors.name ? 'border-red-400' : 'border-gray-200'} rounded-xl px-4 py-3 text-[15px] text-gray-800 focus:outline-none focus:border-[#E91E63] focus:ring-1 focus:ring-[#E91E63] transition-all placeholder:text-gray-400`}
-                      />
-                      {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
-                    </div>
-
-                    {/* Phone Number inline with Send OTP */}
-                    <div>
-                      <label className="block text-sm font-semibold text-gray-800 mb-1.5">Phone number</label>
-                      <div className="flex shadow-sm rounded-xl">
-                        <span className="inline-flex items-center px-3 sm:px-4 rounded-l-xl border border-r-0 border-gray-200 bg-gray-50 text-gray-500 text-sm font-semibold">
-                          +91
-                        </span>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                      {/* Full Name */}
+                      <div>
+                        <label className="block text-sm font-semibold text-gray-800 mb-1.5">Full name</label>
                         <input
                           type="text"
-                          name="phone"
-                          maxLength="10"
-                          disabled={isPhoneVerified}
-                          value={formData.phone}
-                          onChange={(e) => {
-                            const val = e.target.value.replace(/\D/g, '');
-                            handleChange({ target: { name: 'phone', value: val } });
-                            if (isOtpSent) setIsOtpSent(false);
-                          }}
-                          placeholder="10-digit mobile number"
-                          className={`flex-1 min-w-0 border ${errors.phone ? 'border-red-400' : 'border-gray-200'} ${isPhoneVerified ? 'bg-gray-50' : 'border-r-0'} px-3 sm:px-4 py-3 text-[15px] text-gray-800 focus:outline-none focus:border-[#E91E63] focus:ring-1 focus:ring-[#E91E63] transition-all placeholder:text-gray-400`}
+                          name="name"
+                          value={formData.name}
+                          onChange={handleChange}
+                          placeholder="As on your driving licence"
+                          className={`w-full border ${errors.name ? 'border-red-400' : 'border-gray-200'} rounded-xl px-4 py-3 text-[15px] text-gray-800 focus:outline-none focus:border-[#E91E63] focus:ring-1 focus:ring-[#E91E63] transition-all placeholder:text-gray-400`}
                         />
-                        {isPhoneVerified ? (
-                          <div className="flex items-center justify-center px-4 border border-l-0 border-gray-200 rounded-r-xl bg-green-50 text-green-600">
-                            <CheckCircle2 className="w-5 h-5" />
-                          </div>
-                        ) : (
-                          <button
-                            type="button"
-                            onClick={handleSendOtp}
-                            disabled={otpLoading || !formData.phone || formData.phone.length < 10}
-                            className="px-4 sm:px-5 bg-[#E91E63] hover:bg-[#D81B60] text-white font-semibold text-[13px] sm:text-sm rounded-r-xl transition-colors whitespace-nowrap disabled:opacity-60"
-                          >
-                            {otpLoading && !isOtpSent ? 'Sending...' : isOtpSent ? 'Resend' : 'Send OTP'}
-                          </button>
-                        )}
+                        {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
                       </div>
-                      {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
-                      
-                      {/* Inline OTP Input */}
-                      <AnimatePresence>
-                        {isOtpSent && !isPhoneVerified && (
-                          <motion.div 
-                            initial={{ opacity: 0, height: 0, marginTop: 0 }} 
-                            animate={{ opacity: 1, height: 'auto', marginTop: 12 }} 
-                            exit={{ opacity: 0, height: 0, marginTop: 0 }}
-                            className="overflow-hidden"
-                          >
-                            <label className="block text-sm font-semibold text-gray-800 mb-1.5">Enter OTP</label>
-                            <div className="flex shadow-sm rounded-xl">
-                              <input
-                                type="text"
-                                maxLength="6"
-                                value={otp}
-                                onChange={(e) => {
-                                  setOtp(e.target.value.replace(/\D/g, ''));
-                                  setOtpError('');
-                                }}
-                                placeholder="6-digit code"
-                                className={`flex-1 w-full border ${otpError ? 'border-red-400' : 'border-gray-200'} border-r-0 rounded-l-xl px-4 py-3 text-[15px] tracking-widest font-semibold text-gray-800 focus:outline-none focus:border-[#E91E63] focus:ring-1 focus:ring-[#E91E63] transition-all`}
-                              />
-                              <button
-                                type="button"
-                                onClick={handleVerifyOtp}
+
+                      {/* Phone Number */}
+                      <div>
+                        <label className="block text-sm font-semibold text-gray-800 mb-1.5">Phone number</label>
+                        <div className="flex shadow-sm rounded-xl">
+                          <span className="inline-flex items-center px-3 sm:px-4 rounded-l-xl border border-r-0 border-gray-200 bg-gray-50 text-gray-500 text-sm font-semibold">
+                            +91
+                          </span>
+                          <input
+                            type="text"
+                            name="phone"
+                            maxLength="10"
+                            disabled={isPhoneVerified}
+                            value={formData.phone}
+                            onChange={(e) => {
+                              const val = e.target.value.replace(/\D/g, '');
+                              handleChange({ target: { name: 'phone', value: val } });
+                              if (isOtpSent) setIsOtpSent(false);
+                            }}
+                            placeholder="10-digit mobile number"
+                            className={`flex-1 min-w-0 border ${errors.phone ? 'border-red-400' : 'border-gray-200'} ${isPhoneVerified ? 'bg-gray-50' : 'border-r-0'} px-3 sm:px-4 py-3 text-[15px] text-gray-800 focus:outline-none focus:border-[#E91E63] focus:ring-1 focus:ring-[#E91E63] transition-all placeholder:text-gray-400`}
+                          />
+                          {isPhoneVerified ? (
+                            <div className="flex items-center justify-center px-4 border border-l-0 border-gray-200 rounded-r-xl bg-green-50 text-green-600">
+                              <CheckCircle2 className="w-5 h-5" />
+                            </div>
+                          ) : (
+                            <button
+                              type="button"
+                              onClick={handleSendOtp}
+                              disabled={otpLoading || !formData.phone || formData.phone.length < 10}
+                              className="px-4 bg-[#E91E63] hover:bg-[#D81B60] text-white font-semibold text-[13px] rounded-r-xl transition-colors whitespace-nowrap disabled:opacity-60"
+                            >
+                              {otpLoading && !isOtpSent ? '...' : isOtpSent ? 'Resend' : 'Send OTP'}
+                            </button>
+                          )}
+                        </div>
+                        {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
+                        
+                        {/* Inline OTP Input */}
+                        <AnimatePresence>
+                          {isOtpSent && !isPhoneVerified && (
+                            <motion.div 
+                              initial={{ opacity: 0, height: 0, marginTop: 0 }} 
+                              animate={{ opacity: 1, height: 'auto', marginTop: 12 }} 
+                              exit={{ opacity: 0, height: 0, marginTop: 0 }}
+                              className="overflow-hidden"
+                            >
+                              <div className="flex shadow-sm rounded-xl mt-1.5">
+                                <input
+                                  type="text"
+                                  maxLength="6"
+                                  value={otp}
+                                  onChange={(e) => {
+                                    setOtp(e.target.value.replace(/\D/g, ''));
+                                    setOtpError('');
+                                  }}
+                                  placeholder="Enter 6-digit code"
+                                  className={`flex-1 w-full border ${otpError ? 'border-red-400' : 'border-gray-200'} border-r-0 rounded-l-xl px-4 py-2.5 text-sm tracking-widest font-semibold text-gray-800 focus:outline-none focus:border-[#E91E63] focus:ring-1 focus:ring-[#E91E63] transition-all`}
+                                />
+                                <button
+                                  type="button"
+                                  onClick={handleVerifyOtp}
                                 disabled={otpLoading || !otp || otp.length < 4}
                                 className="px-6 bg-[#1A1A2E] hover:bg-black text-white font-semibold text-sm rounded-r-xl transition-colors whitespace-nowrap disabled:opacity-60"
                               >
@@ -345,72 +360,112 @@ export const RiderRegistration = ({ isOpen, onClose }) => {
                         )}
                       </AnimatePresence>
                     </div>
+                  </div>
 
-                    {/* Gender */}
-                    <div>
-                      <label className="block text-sm font-semibold text-gray-800 mb-1.5">Gender</label>
-                      <div className="relative">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                      {/* Gender */}
+                      <div>
+                        <label className="block text-sm font-semibold text-gray-800 mb-1.5">Gender</label>
+                        <div className="relative">
+                          <input
+                            type="text"
+                            value="Female"
+                            disabled
+                            className="w-full border border-gray-200 rounded-xl px-4 py-3 text-[15px] text-gray-800 bg-gray-50 cursor-not-allowed"
+                          />
+                          <svg className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15V3m0 12l-4-4m4 4l4-4M2 17l.621 2.485A2 2 0 004.561 21h14.878a2 2 0 001.94-1.515L22 17" /></svg>
+                        </div>
+                        <p className="text-xs text-gray-400 mt-1">Woosh Queens is a women-only rider community.</p>
+                      </div>
+
+                      {/* City */}
+                      <div>
+                        <label className="block text-sm font-semibold text-gray-800 mb-1.5">City</label>
+                        <div className="relative">
+                          <select
+                            name="city"
+                            value={formData.city}
+                            onChange={handleChange}
+                            className="w-full border border-gray-200 rounded-xl px-4 py-3 text-[15px] text-gray-800 focus:outline-none focus:border-[#E91E63] focus:ring-1 focus:ring-[#E91E63] transition-all bg-white appearance-none"
+                          >
+                            {cities.map((city) => (
+                              <option key={city._id || city.name} value={city.name}>
+                                {city.name}
+                              </option>
+                            ))}
+                          </select>
+                          <svg className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+                        </div>
+                        <p className="text-xs text-gray-400 mt-1">Currently onboarding in {formData.city || 'selected cities'} only.</p>
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                      {/* Age */}
+                      <div>
+                        <label className="block text-sm font-semibold text-gray-800 mb-1.5">Age</label>
                         <input
                           type="text"
-                          value="Female"
-                          disabled
-                          className="w-full border border-gray-200 rounded-xl px-4 py-3 text-[15px] text-gray-800 bg-gray-50 cursor-not-allowed"
+                          name="age"
+                          value={formData.age}
+                          onChange={(e) => {
+                            const val = e.target.value.replace(/\D/g, '');
+                            handleChange({ target: { name: 'age', value: val } });
+                          }}
+                          maxLength="2"
+                          placeholder="Your age in years"
+                          className={`w-full border ${errors.age ? 'border-red-400' : 'border-gray-200'} rounded-xl px-4 py-3 text-[15px] text-gray-800 focus:outline-none focus:border-[#E91E63] focus:ring-1 focus:ring-[#E91E63] transition-all placeholder:text-gray-400`}
                         />
-                        <svg className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15V3m0 12l-4-4m4 4l4-4M2 17l.621 2.485A2 2 0 004.561 21h14.878a2 2 0 001.94-1.515L22 17" /></svg>
+                        {errors.age && <p className="text-red-500 text-xs mt-1">{errors.age}</p>}
                       </div>
-                      <p className="text-xs text-gray-400 mt-1">Woosh Queens is a women-only rider community.</p>
-                    </div>
 
-                    {/* City */}
-                    <div>
-                      <label className="block text-sm font-semibold text-gray-800 mb-1.5">City</label>
-                      <div className="relative">
-                        <select
-                          name="city"
-                          value={formData.city}
-                          onChange={handleChange}
-                          className="w-full border border-gray-200 rounded-xl px-4 py-3 text-[15px] text-gray-800 focus:outline-none focus:border-[#E91E63] focus:ring-1 focus:ring-[#E91E63] transition-all bg-white appearance-none"
-                        >
-                          {cities.map((city) => (
-                            <option key={city._id || city.name} value={city.name}>
-                              {city.name}
-                            </option>
-                          ))}
-                        </select>
-                        <svg className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+                      {/* Areas */}
+                      <div>
+                        <label className="block text-sm font-semibold text-gray-800 mb-1.5">Covered Areas</label>
+                        
+                        <div className="relative">
+                          <div
+                            className={`w-full border ${availableAreas.length === 0 ? 'bg-gray-50 text-gray-400 cursor-not-allowed border-gray-200' : 'bg-white cursor-pointer hover:border-[#E91E63] border-gray-200'} rounded-xl px-4 py-3 text-[15px] flex justify-between items-center transition-all`}
+                            onClick={() => availableAreas.length > 0 && setIsAreaDropdownOpen(!isAreaDropdownOpen)}
+                          >
+                            <span className={`truncate pr-2 ${availableAreas.length === 0 ? 'text-gray-400' : 'text-gray-700 font-medium'}`}>
+                              {availableAreas.length === 0 
+                                ? 'No areas configured' 
+                                : formData.areas.length > 0 
+                                  ? formData.areas.join(', ') 
+                                  : 'Select areas'}
+                            </span>
+                            <ChevronDown size={18} className="text-gray-400 flex-shrink-0" />
+                          </div>
+                          
+                          <AnimatePresence>
+                            {isAreaDropdownOpen && availableAreas.length > 0 && (
+                              <motion.div 
+                                initial={{ opacity: 0, y: -5 }} 
+                                animate={{ opacity: 1, y: 0 }} 
+                                exit={{ opacity: 0, y: -5 }}
+                                transition={{ duration: 0.15 }}
+                                className="absolute z-50 top-full mt-1 left-0 right-0 bg-white border border-gray-200 rounded-xl shadow-xl max-h-[160px] overflow-y-auto"
+                              >
+                                {availableAreas.map(area => {
+                                  const isSelected = formData.areas.includes(area);
+                                  return (
+                                    <label key={area} className="flex items-center px-4 py-2.5 hover:bg-pink-50 cursor-pointer transition-colors border-b border-gray-50 last:border-0">
+                                      <input 
+                                        type="checkbox" 
+                                        checked={isSelected}
+                                        onChange={() => handleAreaToggle(area)}
+                                        className="mr-3 w-4 h-4 text-[#E91E63] rounded border-gray-300 focus:ring-[#E91E63]"
+                                      />
+                                      <span className={`text-sm ${isSelected ? 'font-semibold text-[#E91E63]' : 'text-gray-700'}`}>{area}</span>
+                                    </label>
+                                  );
+                                })}
+                              </motion.div>
+                            )}
+                          </AnimatePresence>
+                        </div>
                       </div>
-                      <p className="text-xs text-gray-400 mt-1">Currently onboarding in {formData.city || 'selected cities'} only.</p>
-                    </div>
-
-                    {/* Areas */}
-                    <div>
-                      <label className="block text-sm font-semibold text-gray-800 mb-1.5">Which areas in {formData.city || 'your city'} can you cover?</label>
-                      <input
-                        type="text"
-                        name="areas"
-                        value={formData.areas}
-                        onChange={handleChange}
-                        placeholder="e.g. MP Nagar, Arera Colony, Kolar Road"
-                        className="w-full border border-gray-200 rounded-xl px-4 py-3 text-[15px] text-gray-800 focus:outline-none focus:border-[#E91E63] focus:ring-1 focus:ring-[#E91E63] transition-all placeholder:text-gray-400"
-                      />
-                    </div>
-
-                    {/* Age */}
-                    <div>
-                      <label className="block text-sm font-semibold text-gray-800 mb-1.5">Age</label>
-                      <input
-                        type="text"
-                        name="age"
-                        value={formData.age}
-                        onChange={(e) => {
-                          const val = e.target.value.replace(/\D/g, '');
-                          handleChange({ target: { name: 'age', value: val } });
-                        }}
-                        maxLength="2"
-                        placeholder="Your age in years"
-                        className={`w-full border ${errors.age ? 'border-red-400' : 'border-gray-200'} rounded-xl px-4 py-3 text-[15px] text-gray-800 focus:outline-none focus:border-[#E91E63] focus:ring-1 focus:ring-[#E91E63] transition-all placeholder:text-gray-400`}
-                      />
-                      {errors.age && <p className="text-red-500 text-xs mt-1">{errors.age}</p>}
                     </div>
 
                     {/* Submit */}
