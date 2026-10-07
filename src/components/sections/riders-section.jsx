@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const BenefitCard = ({ icon, title, description }) => (
   <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-[0_4px_20px_rgba(0,0,0,0.04)] flex flex-col items-start gap-3">
@@ -7,8 +8,8 @@ const BenefitCard = ({ icon, title, description }) => (
       {icon}
     </div>
     <div>
-      <h4 className="text-[#1A1A2E] font-bold text-sm mb-1">{title}</h4>
-      <p className="text-gray-500 text-xs leading-relaxed">{description}</p>
+      <h4 className="text-[#1A1A2E] font-bold text-md mb-1">{title}</h4>
+      <p className="text-gray-500 text-md leading-relaxed">{description}</p>
     </div>
   </div>
 );
@@ -167,31 +168,31 @@ export const RidersSection = () => {
         <div className="bg-[#1A1A2E] rounded-3xl p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-10">
           <div className="flex-1 text-center md:text-left">
             <h3 className="text-white text-3xl md:text-4xl font-bold mb-4">Start riding in 3 steps</h3>
-            <p className="text-gray-400 text-sm max-w-sm mx-auto md:mx-0">Joining is free. Most riders are on the road within a few days.</p>
+            <p className="text-gray-400 text-md max-w-sm mx-auto md:mx-0">Joining is free. Most riders are on the road within a few days.</p>
           </div>
           
           <div className="flex-1 flex flex-col gap-4">
             <div className="flex items-center gap-4 text-white">
               <div className="w-6 h-6 rounded-full bg-[#E91E63] flex items-center justify-center text-xs font-bold shrink-0">1</div>
-              <p className="text-sm">Download the app and choose Ride & Earn</p>
+              <p className="text-md">Download the app and choose Ride & Earn</p>
             </div>
             <div className="flex items-center gap-4 text-white">
               <div className="w-6 h-6 rounded-full bg-gray-700 flex items-center justify-center text-xs font-bold shrink-0 text-gray-300">2</div>
-              <p className="text-sm">Upload your licence and documents</p>
+              <p className="text-md">Upload your licence and documents</p>
             </div>
             <div className="flex items-center gap-4 text-white">
               <div className="w-6 h-6 rounded-full bg-gray-700 flex items-center justify-center text-xs font-bold shrink-0 text-gray-300">3</div>
-              <p className="text-sm">Get verified, trained and go online</p>
+              <p className="text-md">Get verified, trained and go online</p>
             </div>
           </div>
           
           <div className="shrink-0 mt-4 md:mt-0">
-            <button 
-              onClick={() => document.dispatchEvent(new CustomEvent('openRiderModal'))}
+            <Link 
+            to={"https://play.google.com/store/apps/details?id=com.woosh.in"}
               className="bg-white hover:bg-gray-100 text-[#1A1A2E] px-8 py-3.5 rounded-full font-bold transition-colors"
             >
-              Apply to ride
-            </button>
+            Request a Ride
+            </Link>
           </div>
         </div>
 

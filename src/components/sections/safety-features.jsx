@@ -50,8 +50,8 @@ export const SafetyFeatures = () => {
                 <div key={i} className="flex gap-3">
                   <svg className="w-5 h-5 text-[#E91E63] shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" /></svg>
                   <div>
-                    <h4 className="font-bold text-[#1A1A2E] text-[15px] mb-1">{item.title}</h4>
-                    <p className="text-gray-500 text-sm leading-relaxed">{item.desc}</p>
+                    <h4 className="font-bold text-[#1A1A2E] text-md mb-1">{item.title}</h4>
+                    <p className="text-gray-500 text-md leading-relaxed">{item.desc}</p>
                   </div>
                 </div>
               ))}
@@ -87,7 +87,7 @@ export const SafetyFeatures = () => {
                   <svg className="w-5 h-5 text-[#E91E63] shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" /></svg>
                   <div>
                     <h4 className="font-bold text-[#1A1A2E] text-[15px] mb-1">{item.title}</h4>
-                    <p className="text-gray-500 text-sm leading-relaxed">{item.desc}</p>
+                    <p className="text-gray-500 text-md leading-relaxed">{item.desc}</p>
                   </div>
                 </div>
               ))}
@@ -123,7 +123,7 @@ export const SafetyFeatures = () => {
                   <svg className="w-5 h-5 text-[#E91E63] shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" /></svg>
                   <div>
                     <h4 className="font-bold text-[#1A1A2E] text-[15px] mb-1">{item.title}</h4>
-                    <p className="text-gray-500 text-sm leading-relaxed">{item.desc}</p>
+                    <p className="text-gray-500 text-md leading-relaxed">{item.desc}</p>
                   </div>
                 </div>
               ))}
@@ -144,7 +144,7 @@ export const SafetyFeatures = () => {
             <h3 className="text-3xl md:text-4xl font-extrabold text-white mb-4 leading-tight">
               What happens when you press SOS
             </h3>
-            <p className="text-gray-400 text-lg">
+            <p className="text-gray-400 text-md">
               Help is one tap away throughout every ride, and a real person responds.
             </p>
           </div>

@@ -26,7 +26,7 @@ const Home = () => (
   <div className="min-h-screen bg-[#FFFBFD] text-[#2D2D2D] font-sans selection:bg-[#E91E63]/20 selection:text-[#E91E63]">
     <main>
       <HeroSection />
-      <FeaturesShowcase />
+      {/* <FeaturesShowcase /> */}
       <RidersSection />
       <SafetyFeatures />
       <FareBooking />

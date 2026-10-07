@@ -99,7 +99,7 @@ export const ChildMode = () => {
                 >
                   <div className="text-[#E91E63] font-black text-sm mb-2">{step.num}</div>
                   <h3 className="font-bold text-[#1A1A2E] text-lg mb-2">{step.title}</h3>
-                  <p className="text-gray-500 text-[14px] leading-relaxed">{step.desc}</p>
+                  <p className="text-gray-500 text-[16px] leading-relaxed">{step.desc}</p>
                 </motion.div>
               ))}
             </div>

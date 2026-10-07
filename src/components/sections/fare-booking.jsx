@@ -43,7 +43,7 @@ export const FareBooking = () => {
                   </div>
                   <div>
                     <h3 className="text-lg font-bold text-[#1A1A2E] mb-1">{step.title}</h3>
-                    <p className="text-gray-500 text-[15px]">{step.desc}</p>
+                    <p className="text-gray-500 text-md">{step.desc}</p>
                   </div>
                 </motion.div>
               ))}
@@ -137,7 +137,7 @@ export const FareBooking = () => {
                 <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">{item.icon}</svg>
               </div>
               <h4 className="font-bold text-[#1A1A2E] text-lg mb-2">{item.title}</h4>
-              <p className="text-gray-500 text-[14px] leading-relaxed">{item.desc}</p>
+              <p className="text-gray-500 text-[16px] leading-relaxed">{item.desc}</p>
             </motion.div>
           ))}
         </div>
