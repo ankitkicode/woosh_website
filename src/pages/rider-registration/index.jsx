@@ -449,18 +449,19 @@ export const RiderRegistration = ({ isOpen, onClose }) => {
                                 transition={{ duration: 0.15 }}
                                 className="absolute z-50 top-full mt-1 left-0 right-0 bg-white border border-gray-200 rounded-xl shadow-xl max-h-[160px] overflow-y-auto"
                               >
-                                {availableAreas.map(area => {
-                                  const isSelected = formData.areas.includes(area);
+                                {availableAreas.map(areaObj => {
+                                  const areaName = areaObj.name || areaObj; // fallback just in case it's string
+                                  const isSelected = formData.areas.includes(areaName);
                                   return (
-                                    <label key={area} className="flex items-center px-4 py-2.5 hover:bg-pink-50 cursor-pointer transition-colors border-b border-gray-50 last:border-0">
+                                    <label key={areaName} className="flex items-center px-4 py-2.5 hover:bg-pink-50 cursor-pointer transition-colors border-b border-gray-50 last:border-0">
                                       <input 
                                         type="radio"
                                         name="selected_area"
                                         checked={isSelected}
-                                        onChange={() => handleAreaToggle(area)}
+                                        onChange={() => handleAreaToggle(areaName)}
                                         className="mr-3 w-4 h-4 text-[#E91E63] border-gray-300 focus:ring-[#E91E63]"
                                       />
-                                      <span className={`text-sm ${isSelected ? 'font-semibold text-[#E91E63]' : 'text-gray-700'}`}>{area}</span>
+                                      <span className={`text-sm ${isSelected ? 'font-semibold text-[#E91E63]' : 'text-gray-700'}`}>{areaName}</span>
                                     </label>
                                   );
                                 })}
